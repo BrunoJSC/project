@@ -52,7 +52,7 @@ export function Header() {
         </nav>
         <Link
           to="/anunciar"
-          className="py-[14px] hidden px-[28px] rounded-[8px] bg-[#15803D] text-white hover:bg-[#0F6E0F] font-bold text-[14px] md:text-base ml-5"
+          className="py-[14px] hidden md:block px-[28px] rounded-[8px] bg-[#15803D] text-white hover:bg-[#0F6E0F] font-bold text-[14px] md:text-base ml-5"
         >
           Anunciar
         </Link>
