@@ -7,6 +7,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import { auth } from "../firebase";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 
 const schema = zod.object({
   email: zod.string().email(),
@@ -16,6 +17,7 @@ const schema = zod.object({
 type FormData = zod.infer<typeof schema>;
 
 export function Admin() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -29,6 +31,7 @@ export function Admin() {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
       // navigate
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
     }

@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.1",
     "firebase": "^10.3.0",
@@ -17,6 +18,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.4",
+    "react-multi-select-component": "^4.3.4",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.15.0",
     "zod": "^3.22.2"
   },

@@ -9,6 +9,11 @@ import { Announce } from "./pages/Announce";
 import { Financing } from "./pages/Financing";
 import { Form } from "./pages/Form";
 import { CarsPage } from "./pages/CarsPage";
+import PrivateRoute from "./routes/PrivateRoute";
+import { Dashboard } from "./admin/Dashboard";
+import { CreateCar } from "./pages/CreateCar";
+import { NotFound } from "./pages/404";
+import { DetailsCar } from "./pages/DetailsCar";
 
 export default function App() {
   return (
@@ -79,7 +84,43 @@ export default function App() {
             }
           />
 
+          <Route
+            path="carros/detalhes/:id"
+            element={
+              <PublicRoute>
+                <DetailsCar />
+              </PublicRoute>
+            }
+          />
+
           {/* Protected Routes */}
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/criar-carro"
+            element={
+              <PrivateRoute>
+                <CreateCar />
+              </PrivateRoute>
+            }
+          />
+
+          {/* 404 */}
+          <Route
+            path="*"
+            element={
+              <PublicRoute>
+                <NotFound />
+              </PublicRoute>
+            }
+          />
         </Routes>
       </AuthProvider>
     </div>

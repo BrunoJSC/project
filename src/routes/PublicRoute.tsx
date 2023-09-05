@@ -9,7 +9,7 @@ interface PublicRouteProps {
 export default function PublicRoute({ children }: PublicRouteProps) {
   const { user } = useAuth();
   if (user) {
-    return <Navigate to="/admin" replace={true} />;
+    return <Navigate to="/dashboard" replace={true} />;
   }
   return <>{children}</>;
 }
