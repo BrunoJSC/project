@@ -314,12 +314,9 @@ export function Form() {
                   <option value="Diesel">Diesel</option>
                   <option value="Etanol">Etanol</option>
                   <option value="GNV">GNV</option>
-                  <option value="Elétrico">Elétrico</option>
-                  <option value="Híbrido">Híbrido</option>
                 </select>
               </div>
             </div>
-
 
             <div className="col-span-6">
               <label className="block text-sm font-bold leading-6 text-gray-900">

@@ -1,11 +1,12 @@
 import { onSnapshot, collection } from "firebase/firestore";
 import { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Header } from "../components/Header";
 import { db } from "../firebase";
 import { Layout } from "../layout/Layout";
 import { Footer } from "../sections/Footer";
 import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // Importe os estilos do carrossel
 
 interface CarsProps {
   id: string;
@@ -17,7 +18,7 @@ interface CarsProps {
   color: string;
   exchange: string;
   direction: string;
-  typeFuel: string;
+  fuel: string;
   location: string;
   yearFactory: number;
   yearModification: number;
@@ -32,7 +33,6 @@ export function DetailsCar() {
   const state = location.state as { data: CarsProps };
   const car = state?.data;
 
-  console.log(car);
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "cars"), (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
@@ -49,12 +49,34 @@ export function DetailsCar() {
     <div>
       <Header />
       <Layout className="min-h-screen">
-        <div className="w-full h-[805px]">
-          <Carousel autoPlay>
-            {car?.images.map((image) => (
-              <img className="w-full h-full" src={image} />
-            ))}
-          </Carousel>
+        <div className="w-full h-[900px]">
+          {car?.images && (
+            <Carousel
+              showArrows={true}
+              showStatus={false}
+              showIndicators={false}
+              showThumbs={false}
+              infiniteLoop={true}
+              autoPlay={true}
+              interval={3000}
+              transitionTime={1000}
+              stopOnHover={true}
+              swipeable={true}
+              emulateTouch={true}
+              dynamicHeight={true}
+              width="100%"
+            >
+              {car.images.map((image, index) => (
+                <div key={index}>
+                  <img
+                    src={image}
+                    alt={`car-${index}`}
+                    className="w-full h-full object-contain bg-red-500"
+                  />
+                </div>
+              ))}
+            </Carousel>
+          )}
         </div>
 
         <h1 className="text-[#1E1E1E] text-xl md:text-2xl font-bold">

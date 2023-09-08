@@ -7,13 +7,13 @@ import { Admin } from "./pages/Admin";
 import { Contact } from "./pages/Contact";
 import { Announce } from "./pages/Announce";
 import { Financing } from "./pages/Financing";
-import { Form } from "./pages/Form";
 import { CarsPage } from "./pages/CarsPage";
 import PrivateRoute from "./routes/PrivateRoute";
 import { Dashboard } from "./admin/Dashboard";
 import { CreateCar } from "./pages/CreateCar";
 import { NotFound } from "./pages/404";
 import { DetailsCar } from "./pages/DetailsCar";
+import { Form } from "./pages/Form";
 
 export default function App() {
   return (

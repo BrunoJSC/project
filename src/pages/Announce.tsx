@@ -34,7 +34,7 @@ export function Announce() {
           </p>
         </div>
         <div className="max-w-screen-lg mx-auto h-auto relative">
-          <div className="max-w-screen-lg mx-auto h-auto rounded-lg p-4 bg-gradient-to-r from-[#1E1E1E] to-transparent bg-green-200">
+          <div className="max-w-screen-lg mx-auto h-auto rounded-lg p-4 bg-gradient-to-r from-[#1E1E1E] to-transparent bg-green-100">
             <Card
               title="Ampla Audiência de Potenciais Compradores"
               text="Ao anunciar seu carro no site AutoNegocie, você terá acesso a uma ampla base de potenciais compradores interessados em adquirir veículos. Isso aumenta suas chances de encontrar um comprador rapidamente e fechar um bom negócio."
@@ -67,7 +67,7 @@ export function Announce() {
           </div>
 
           <a
-            className="mt-10 block w-full mb-11 md:w-[400px] rounded bg-green-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-green-700 focus:outline-none focus:ring active:bg-green-500"
+            className="mt-16 block w-full mb-11 md:w-[400px] rounded bg-green-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-green-700 focus:outline-none focus:ring active:bg-green-500"
             href="/form"
           >
             Faça seu anúncio com a gente

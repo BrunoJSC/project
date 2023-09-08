@@ -126,10 +126,9 @@ const exchange = [
 ];
 
 const direction = [
-  { value: "left-hand-drive", label: "Direção à Esquerda" },
-  { value: "right-hand-drive", label: "Direção à Direita" },
-  { value: "centered", label: "Direção Centralizada" },
-  { value: "other", label: "Outro Tipo de Direção" },
+  { value: "Manual", label: "manual" },
+  { value: "Eletrica", label: "eletrica" },
+  { value: "Hidraulica", label: "hidraulica" },
 ];
 
 const fuel = [
@@ -147,10 +146,31 @@ const accessories = [
   { value: "Ar Condicionado", label: "Ar Condicionado" },
   { value: "Catalisador", label: "Catalisador" },
   { value: "Climatizador", label: "Climatizador" },
-  { value: "Direcção Eletrica", label: "Direcção Eletrica" },
-  { value: "Direcção Hidráulica", label: "Direcção Hidráulica" },
-  { value: "Direcção Manual", label: "Direcção Manual" },
   { value: "Direção Traseira", label: "Direção Traseira" },
+  { value: "Air Bag", label: "Air Bag" },
+  { value: "Ar Quente", label: "Ar Quente" },
+  { value: "Aros de Liga Leve", label: "Aros de Liga Leve" },
+  { value: "Banco de Couro", label: "Banco de Couro" },
+  { value: "Blindado", label: "Blindado" },
+  { value: "Câmbio Automático", label: "Câmbio Automático" },
+  { value: "Cd Player", label: "Cd Player" },
+  { value: "Desembaçador Traseiro", label: "Desembaçador Traseiro" },
+  { value: "Direção Elétrica", label: "Direção Elétrica" },
+  { value: "Direção Hidráulica", label: "Direção Hidráulica" },
+  { value: "Freio ABS", label: "Freio ABS" },
+  { value: "Limpador Traseiro", label: "Limpador Traseiro" },
+  { value: "Painel Digital", label: "Painel Digital" },
+  { value: "Retrovisor Elétrico", label: "Retrovisor Elétrico" },
+  { value: "Teto Solar", label: "Teto Solar" },
+  { value: "Tração 4x4", label: "Tração 4x4" },
+  { value: "Trava Elétrica", label: "Trava Elétrica" },
+  { value: "Único Dono", label: "Único Dono" },
+  { value: "Vidro Elétrico", label: "Vidro Elétrico" },
+  { value: "Volante Regulável", label: "Volante Regulável" },
+  { value: "Piloto Automático", label: "Piloto Automático" },
+  { value: "Camera de Ré", label: "Camera de Ré" },
+  { value: "Chave Reserva", label: "Chave Reserva" },
+  { value: "GPS", label: "GPS" },
 ];
 
 const doors = [
@@ -169,7 +189,7 @@ interface CarsProps {
   color: string;
   exchange: string;
   direction: string;
-  typeFuel: string;
+  fuel: string;
   location: string;
   yearFactory: number;
   yearModification: number;
@@ -226,18 +246,18 @@ export function CarsPage() {
           <div
             className={`${
               isMenuOpen ? "block" : "hidden"
-            } md:block bg-green-700 w-[500px] h-[1700px] p-4 transition-transform duration-300 ease-in-out`}
+            } md:block bg-green-700 w-[500px] h-[1986px] p-4 transition-transform duration-300 ease-in-out`}
           >
             <h1 className="text-white text-[32px] font-bold mb-4">Filtros</h1>
             <div>
               <label
                 htmlFor="modelSelect"
-                className="block mb-2 text-white text-[20px]"
+                className="block mb-2 text-white text-[16px]"
               >
                 Modelo de Carro
               </label>
               <select
-                className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
+                className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                 id="modelSelect"
                 value={selectedModel}
                 onChange={(e) => setSelectedModel(e.target.value)}
@@ -254,33 +274,33 @@ export function CarsPage() {
             <div className="mt-4">
               <label
                 htmlFor="typeFuel"
-                className="block mb-2 text-white  text-[20px]"
+                className="block mb-2 text-white  text-[16px]"
               >
-                Tipo de Combustível:
+                Tipo de Combustível
               </label>
               <select
                 id="typeFuel"
                 value={selectedFuel}
-                className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
+                className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                 onChange={(e) => setSelectedFuel(e.target.value)}
               >
                 <option value="">Selecione um tipo de combustível</option>
                 {data.map((car) => (
-                  <option key={car.id} value={car.typeFuel}>
-                    {car.typeFuel}
+                  <option key={car.id} value={car.fuel}>
+                    {car.fuel}
                   </option>
                 ))}
               </select>
             </div>
 
             <div className="mt-4">
-              <label htmlFor="brand" className="text-white  text-[20px] mb-2">
+              <label htmlFor="brand" className="text-white  text-[16px] mb-2">
                 Marca:
               </label>
               <select
                 id="brand"
                 value={selectedBrand}
-                className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
+                className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                 onChange={(e) => setSelectedBrand(e.target.value)}
               >
                 <option value="">Selecione uma marca</option>
@@ -296,14 +316,14 @@ export function CarsPage() {
               <div className="cols-span-2">
                 <label
                   htmlFor="yearFactory"
-                  className="block text-white text-[20px] mb-2"
+                  className="block text-white text-[16px] mb-2"
                 >
-                  Ano de Fabricação:
+                  Ano inicial
                 </label>
                 <select
                   id="yearFactory"
                   value={selectedYearFactory}
-                  className="px-[14px] py-[10px] bg-green-200 rounded-md cols-span-2 w-full"
+                  className="px-[14px] py-[7px] bg-green-200 rounded-md cols-span-2 w-full"
                   onChange={(e) => setSelectedYearFactory(e.target.value)}
                 >
                   <option value="">Selecione um ano de fabricação</option>
@@ -318,14 +338,14 @@ export function CarsPage() {
               <div>
                 <label
                   htmlFor="yearModification"
-                  className="block text-white  text-[20px] mb-2"
+                  className="block text-white  text-[16px] mb-2"
                 >
-                  Ano de Modificação:
+                  Ano de final
                 </label>
                 <select
                   id="yearModification"
                   value={selectedYearModification}
-                  className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
+                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                   onChange={(e) => setSelectedYearModification(e.target.value)}
                 >
                   <option value="">Selecione um ano de modificação</option>
@@ -342,14 +362,14 @@ export function CarsPage() {
               <div>
                 <label
                   htmlFor="km"
-                  className="block text-white text-[20px] mb-2"
+                  className="block text-white text-[16px] mb-2"
                 >
-                  KM Inicial:
+                  KM Inicial
                 </label>
                 <select
                   id="km"
                   value={selectedKmStart}
-                  className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
+                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                   onChange={(e) => setSelectedKmStart(e.target.value)}
                 >
                   <option value="">Selecione um KM inicial</option>
@@ -364,14 +384,14 @@ export function CarsPage() {
               <div>
                 <label
                   htmlFor="km"
-                  className="block text-white text-[20px] mb-2"
+                  className="block text-white text-[16px] mb-2"
                 >
-                  KM Final:
+                  KM Final
                 </label>
                 <select
                   id="km"
                   value={selectedKmEnd}
-                  className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
+                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                   onChange={(e) => setSelectedKmEnd(e.target.value)}
                 >
                   <option value="">Selecione um KM final</option>
@@ -382,23 +402,19 @@ export function CarsPage() {
                   ))}
                 </select>
               </div>
-
-              <div>
-                <input type="checkbox" value="Zero KM" />
-              </div>
             </div>
 
             <div className="mt-4">
               <label
                 htmlFor="city"
-                className="block text-white text-[20px] mb-2"
+                className="block text-white text-[16px] mb-2"
               >
-                Cidade:
+                Cidade
               </label>
               <select
                 id="city"
                 value={selectedCity}
-                className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
+                className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                 onChange={(e) => setSelectedCity(e.target.value)}
               >
                 <option value="">Selecione uma cidade</option>
@@ -421,7 +437,7 @@ export function CarsPage() {
                 type="range"
                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-10"
               />
-              <strong className="text-white text-[20px]">
+              <strong className="text-white text-[16px]">
                 {formatPrice(filteredPrice)}
               </strong>
             </div>
@@ -430,14 +446,14 @@ export function CarsPage() {
               <div className="mt-4">
                 <label
                   htmlFor="advertisers"
-                  className="text-white  text-[20px] mb-2"
+                  className="text-white  text-[16px] mb-2"
                 >
                   Anunciantes
                 </label>
                 <select
                   id="advertisers"
                   value={selectedBrand}
-                  className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
+                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                   onChange={(e) => setSelectedBrand(e.target.value)}
                 >
                   <option value="">Selecione um anunciante</option>
@@ -453,14 +469,14 @@ export function CarsPage() {
               <div>
                 <label
                   htmlFor="exchange"
-                  className="block text-white text-[20px] mb-2"
+                  className="block text-white text-[16px] mb-2"
                 >
                   Cambio
                 </label>
                 <select
                   id="exchange"
                   value={selectedExchange}
-                  className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
+                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                   onChange={(e) => setSelectedExchange(e.target.value)}
                 >
                   <option value="">Selecione um KM inicial</option>
@@ -475,14 +491,14 @@ export function CarsPage() {
               <div>
                 <label
                   htmlFor="direction"
-                  className="block text-white text-[20px] mb-2"
+                  className="block text-white text-[16px] mb-2"
                 >
                   Direção
                 </label>
                 <select
                   id="direction"
                   value={selectedDirection}
-                  className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
+                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                   onChange={(e) => setSelectedDirection(e.target.value)}
                 >
                   <option value="">Selecione um KM final</option>
@@ -497,13 +513,13 @@ export function CarsPage() {
 
             <div>
               <div className="mt-4">
-                <label htmlFor="fuel" className="text-white  text-[20px] mb-2">
+                <label htmlFor="fuel" className="text-white  text-[16px] mb-2">
                   Tipo de Combustivel
                 </label>
                 <select
                   id="fuel"
                   value={selectedBrand}
-                  className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
+                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                   onChange={(e) => setSelectedBrand(e.target.value)}
                 >
                   <option value="">Selecione um tipo de combustível</option>
@@ -519,23 +535,27 @@ export function CarsPage() {
             <div className="mt-4">
               <label
                 htmlFor="accessories"
-                className="block text-white text-[20px] mb-2"
+                className="block text-white text-[16px] mb-2"
               >
                 acessorios
               </label>
-              <select
-                id="city"
-                value={selectedAccessories}
-                className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
-                onChange={(e) => setSelectedAccessories(e.target.value)}
-              >
-                <option value="">Selecione um acessorio</option>
-                {accessories.map((car) => (
-                  <option key={car.value} value={car.label}>
-                    {car.label}
-                  </option>
+              <div className="grid grid-cols-2 gap-4 w-full">
+                {accessories.map((accessory) => (
+                  <div
+                    key={accessory.value}
+                    className="bg-red-500 flex items-center gap-2"
+                  >
+                    <input
+                      type="checkbox"
+                      id={accessory.value}
+                      name={accessory.value}
+                      value={accessory.value}
+                      onChange={(e) => setSelectedAccessories(e.target.value)}
+                    />
+                    <label className="text-[12px]">{accessory.label}</label>
+                  </div>
                 ))}
-              </select>
+              </div>
             </div>
 
             <div className="mt-4">
@@ -580,7 +600,7 @@ export function CarsPage() {
                       car.price >= filteredPrice)) &&
                   (!selectedExchange || car.exchange === selectedExchange) &&
                   (!selectedDirection || car.direction === selectedDirection) &&
-                  (!selectedFuel || car.typeFuel === selectedFuel) &&
+                  (!selectedFuel || car.fuel === selectedFuel) &&
                   (!selectedDoors ||
                     Number(car.doors) === Number(selectedDoors))
               )
@@ -607,7 +627,7 @@ export function CarsPage() {
                       <p>{car.location}</p>
                       <p>Ano: {car.yearFactory}</p>
                       <p>KM: {car.km}</p>
-                      <p>Tipo de Combustível: {car.typeFuel}</p>
+                      <p>Tipo de Combustível: {car.fuel}</p>
                     </div>
                     <div>
                       <p>Valor: {formatPrice(car.price)}</p>
