@@ -136,6 +136,7 @@ const fuel = [
   { value: "Alcool", label: "Alcool" },
   { value: "Diesel", label: "Diesel" },
   { value: "Flex", label: "Flex" },
+  { value: "GNV", label: "GVN" },
   { value: "Hibrido", label: "Hibrido" },
 ];
 
@@ -179,6 +180,14 @@ const doors = [
   { value: 4, label: "4" },
 ];
 
+const body = [
+  { value: "seda", label: "Sedan" },
+  { value: "hatchback", label: "Hatchback" },
+  { value: "utilitario", label: "Utilitario" },
+  { value: "suv", label: "SUV" },
+  { value: "van", label: "Van" },
+];
+
 interface CarsProps {
   id: string;
   model: string;
@@ -189,6 +198,7 @@ interface CarsProps {
   color: string;
   exchange: string;
   direction: string;
+  typeBody: string;
   fuel: string;
   location: string;
   yearFactory: number;
@@ -212,6 +222,7 @@ export function CarsPage() {
   const [selectedAccessories, setSelectedAccessories] = useState<string>("");
   const [selectedFuel, setSelectedFuel] = useState("");
   const [selectedDoors, setSelectedDoors] = useState("");
+  const [selectedTypeBody, setSelectedTypeBody] = useState("");
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "cars"), (snapshot) => {
@@ -256,19 +267,12 @@ export function CarsPage() {
               >
                 Modelo de Carro
               </label>
-              <select
+              <input
                 className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                 id="modelSelect"
                 value={selectedModel}
                 onChange={(e) => setSelectedModel(e.target.value)}
-              >
-                <option value="">Selecione um modelo</option>
-                {data.map((car) => (
-                  <option key={car.id} value={car.model}>
-                    {car.model}
-                  </option>
-                ))}
-              </select>
+              />
             </div>
 
             <div className="mt-4">
@@ -276,18 +280,18 @@ export function CarsPage() {
                 htmlFor="typeFuel"
                 className="block mb-2 text-white  text-[16px]"
               >
-                Tipo de Combustível
+                Carroceria
               </label>
               <select
-                id="typeFuel"
+                id="typeBody"
                 value={selectedFuel}
                 className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                 onChange={(e) => setSelectedFuel(e.target.value)}
               >
                 <option value="">Selecione um tipo de combustível</option>
-                {data.map((car) => (
-                  <option key={car.id} value={car.fuel}>
-                    {car.fuel}
+                {body.map((car) => (
+                  <option key={car.value} value={car.value}>
+                    {car.label}
                   </option>
                 ))}
               </select>
@@ -295,7 +299,7 @@ export function CarsPage() {
 
             <div className="mt-4">
               <label htmlFor="brand" className="text-white  text-[16px] mb-2">
-                Marca:
+                Marca
               </label>
               <select
                 id="brand"
@@ -602,7 +606,7 @@ export function CarsPage() {
                   (!selectedDirection || car.direction === selectedDirection) &&
                   (!selectedFuel || car.fuel === selectedFuel) &&
                   (!selectedDoors ||
-                    Number(car.doors) === Number(selectedDoors))
+                    Number(car.doors) === Number(selectedDoors)),
               )
               .map((car) => (
                 <Link
