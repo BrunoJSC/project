@@ -24,6 +24,8 @@ interface CreateCarProps {
   doors: number;
   accessory: string[];
   price: number;
+  exchange: string;
+  km: number;
   fuel: string;
   description: string;
   images: string[];
@@ -42,9 +44,11 @@ const schema = z.object({
   yearModification: z.number(),
   color: z.string(),
   doors: z.number(),
+  exchange: z.string(),
   accessory: z.array(z.string()),
   price: z.number(),
   fuel: z.string(),
+  km: z.number(),
   description: z.string(),
   images: z.array(z.string()),
 });
@@ -59,7 +63,6 @@ const accessories = [
   { value: "Catalisador", label: "Catalisador" },
   { value: "Climatizador", label: "Climatizador" },
   { value: "Direção Traseira", label: "Direção Traseira" },
-  { value: "Air Bag", label: "Air Bag" },
   { value: "Ar Quente", label: "Ar Quente" },
   { value: "Aros de Liga Leve", label: "Aros de Liga Leve" },
   { value: "Banco de Couro", label: "Banco de Couro" },
@@ -279,12 +282,35 @@ export function CreateCar() {
                     {...register("typeBody")}
                     className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
                   >
+                    <option>Selecione o tipo da carroceria</option>
                     <option>SUV</option>
                     <option>Sedan</option>
                     <option>Hatch</option>
                     <option>Utilitário</option>
                     <option>Van</option>
                   </select>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="sm:col-span-6">
+                <label
+                  htmlFor="color"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  KM
+                </label>
+                <div className="mt-2">
+                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                    <input
+                      type="text"
+                      id="km"
+                      {...register("km")}
+                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                      placeholder="Ex: 18.000"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -388,7 +414,7 @@ export function CreateCar() {
                       id="yearModification"
                       {...register("yearModification")}
                       className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                      placeholder="Ex: ABC-1234"
+                      placeholder="Ex: 2025"
                     />
                   </div>
                 </div>
@@ -435,6 +461,24 @@ export function CreateCar() {
                     </select>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div className="col-span-6 mt-5">
+              <label className="block text-sm font-medium leading-6 text-gray-900">
+                Selecione o cambio
+              </label>
+              <div className="mt-2">
+                <select
+                  className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                  {...register("exchange", { required: true })}
+                >
+
+                  <option>Selecione o tipo de cambio</option>
+                  <option value="Manual">Manual</option>
+                  <option value="eletrica">Eletrica</option>
+                  <option value="hidraulica">Hidraulica</option>
+                </select>
               </div>
             </div>
 
@@ -500,10 +544,12 @@ export function CreateCar() {
                     className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
                   >
                     <option value="">Selecione um tipo de combustível</option>
+                    <option value="flex">Flex</option>
                     <option value="Gasolina">Gasolina</option>
                     <option value="Diesel">Diesel</option>
                     <option value="Etanol">Etanol</option>
                     <option value="GNV">GNV</option>
+                    <option value="eletrico">Eletrico</option>
                   </select>
                 </div>
               </div>

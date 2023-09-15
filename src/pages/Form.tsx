@@ -27,6 +27,7 @@ interface CreateCarPageProps {
   accessory: string[];
   price: number;
   typeFuel: string;
+  exchange: string;
   description: string;
   images: string[];
 }
@@ -51,11 +52,45 @@ const schema = z.object({
   accessory: z.array(z.string()),
   price: z.number(),
   km: z.number(),
+  exchange: z.string(),
   description: z.string(),
   images: z.array(z.string()),
 });
 
 type FormState = z.infer<typeof schema>;
+
+const accessories = [
+  { value: "ABS", label: "ABS" },
+  { value: "Airbag", label: "Airbag" },
+  { value: "Alarme", label: "Alarme" },
+  { value: "Ar Condicionado", label: "Ar Condicionado" },
+  { value: "Catalisador", label: "Catalisador" },
+  { value: "Climatizador", label: "Climatizador" },
+  { value: "Direção Traseira", label: "Direção Traseira" },
+  { value: "Ar Quente", label: "Ar Quente" },
+  { value: "Aros de Liga Leve", label: "Aros de Liga Leve" },
+  { value: "Banco de Couro", label: "Banco de Couro" },
+  { value: "Blindado", label: "Blindado" },
+  { value: "Câmbio Automático", label: "Câmbio Automático" },
+  { value: "Cd Player", label: "Cd Player" },
+  { value: "Desembaçador Traseiro", label: "Desembaçador Traseiro" },
+  { value: "Direção Elétrica", label: "Direção Elétrica" },
+  { value: "Direção Hidráulica", label: "Direção Hidráulica" },
+  { value: "Freio ABS", label: "Freio ABS" },
+  { value: "Limpador Traseiro", label: "Limpador Traseiro" },
+  { value: "Painel Digital", label: "Painel Digital" },
+  { value: "Retrovisor Elétrico", label: "Retrovisor Elétrico" },
+  { value: "Teto Solar", label: "Teto Solar" },
+  { value: "Tração 4x4", label: "Tração 4x4" },
+  { value: "Trava Elétrica", label: "Trava Elétrica" },
+  { value: "Único Dono", label: "Único Dono" },
+  { value: "Vidro Elétrico", label: "Vidro Elétrico" },
+  { value: "Volante Regulável", label: "Volante Regulável" },
+  { value: "Piloto Automático", label: "Piloto Automático" },
+  { value: "Camera de Ré", label: "Camera de Ré" },
+  { value: "Chave Reserva", label: "Chave Reserva" },
+  { value: "GPS", label: "GPS" },
+];
 
 export function Form() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -138,7 +173,7 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <input
-                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    className="block w-full bg-[#15803D29] rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6"
                     {...register("name", { required: true })}
                   />
                 </div>
@@ -150,7 +185,7 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <input
-                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6  bg-[#15803D29]"
                     {...register("email", { required: true })}
                   />
                 </div>
@@ -164,7 +199,7 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <input
-                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    className="block w-full bg-['rgba(21, 128, 61, 0.16)] rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                     {...register("fip", { required: true })}
                   />
                 </div>
@@ -176,7 +211,7 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <input
-                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                     {...register("phone", { required: true })}
                   />
                 </div>
@@ -188,7 +223,7 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <select
-                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                     {...register("location", { required: true })}
                   >
                     <option value="">Selecione um estado</option>
@@ -224,6 +259,25 @@ export function Form() {
               </div>
             </div>
 
+            <div className="col-span-6">
+              <label className="block text-sm font-bold leading-6 text-gray-900">
+                Selecione o cambio
+              </label>
+              <div className="mt-2">
+                <select
+                  className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
+                  {...register("exchange", { required: true })}
+                >
+
+                  <option>Selecione o tipo de cambio</option>
+                  <option value="Manual">Manual</option>
+                  <option value="eletrica">Eletrica</option>
+                  <option value="hidraulica">Hidraulica</option>
+                </select>
+              </div>
+            </div>
+
+
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
               <div>
                 <label className="block text-sm font-bold leading-6 text-gray-900">
@@ -231,7 +285,7 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <input
-                    className="block w-full py-1.5 bg-form rounded-[8px] px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    className="block w-full py-1.5 bg-form rounded-[8px] px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                     {...register("brand", { required: true })}
                   />
                 </div>
@@ -243,7 +297,7 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <input
-                    className="block w-full py-1.5 bg-form rounded-[8px] px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    className="block w-full py-1.5 bg-form rounded-[8px] px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                     {...register("model", { required: true })}
                   />
                 </div>
@@ -256,10 +310,17 @@ export function Form() {
                 Tipo de Carroceria
               </label>
               <div className="mt-2">
-                <input
-                  className="block w-full py-1.5 bg-form rounded-[8px] px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                <select
+                  className="block w-full py-1.5 bg-form rounded-[8px] px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                   {...register("typeBody", { required: true })}
-                />
+                >
+                  <option>Selecione carroceria</option>
+                  <option value="suv">SUV</option>
+                  <option value="sedan">Sedan</option>
+                  <option value="hatch">Hatch</option>
+                  <option value="utilitarios">Utilitário</option>
+                  <option value="van">Van</option>
+                </select>
               </div>
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
@@ -269,7 +330,7 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <input
-                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                     {...register("mechanic", { required: true })}
                   />
                 </div>
@@ -281,7 +342,7 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <input
-                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                     {...register("plate", { required: true })}
                   />
                 </div>
@@ -293,10 +354,14 @@ export function Form() {
                 Leilão
               </label>
               <div className="mt-2">
-                <input
-                  className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                <select
+                  className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                   {...register("auction", { required: true })}
-                />
+                >
+                  <option>Selecione sim ou  não</option>
+                  <option value="sim">Sim</option>
+                  <option value="Não">Não</option>
+                </select>
               </div>
             </div>
 
@@ -306,7 +371,7 @@ export function Form() {
               </label>
               <div className="mt-2">
                 <select
-                  className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                  className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                   {...register("typeFuel", { required: true })}
                 >
                   <option value="">Selecione um tipo de combustível</option>
@@ -327,7 +392,8 @@ export function Form() {
               </label>
               <div className="mt-2">
                 <input
-                  className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                  placeholder="Ex 18.000"
+                  className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                   {...register("km", { required: true })}
                 />
               </div>
@@ -340,7 +406,8 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <input
-                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    placeholder="Ex: 2020"
+                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                     {...register("yearFactory", { required: true })}
                   />
                 </div>
@@ -352,7 +419,8 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <input
-                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    placeholder="Ex: 2024"
+                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                     {...register("yearModification", { required: true })}
                   />
                 </div>
@@ -366,7 +434,8 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <input
-                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    placeholder="Ex: Azul"
+                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                     {...register("color", { required: true })}
                   />
                 </div>
@@ -378,22 +447,37 @@ export function Form() {
                 </label>
                 <div className="mt-2">
                   <input
-                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                     {...register("doors", { required: true })}
                   />
                 </div>
               </div>
             </div>
 
-            <div className="col-span-6">
-              <label className="block text-sm font-bold leading-6 text-gray-900">
+            <div className="sm:col-span-6 mt-6 w-full">
+              <label
+                htmlFor="accessories"
+                className="block text-sm font-bold leading-6 text-gray-900 "
+              >
                 Acessórios do Carro
               </label>
-              <div className="mt-2">
-                <input
-                  className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                  {...register("accessory", { required: true })}
-                />
+              <div className="mt-2 w-full">
+                <div className="w-full space-y-2 grid grid-cols-2">
+                  {accessories.map((accessory) => (
+                    <label key={accessory.value} className="flex items-center">
+                      <input
+                        type="checkbox"
+                        id={accessory.value}
+                        value={accessory.value}
+                        {...register("accessory")}
+                        className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                      />
+                      <span className="ml-2 text-gray-900">
+                        {accessory.label}
+                      </span>
+                    </label>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -403,7 +487,7 @@ export function Form() {
               </label>
               <div className="mt-2">
                 <input
-                  className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                  className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                   {...register("price", { required: true })}
                 />
               </div>
@@ -416,7 +500,7 @@ export function Form() {
             </label>
             <div className="mt-2">
               <textarea
-                className="block w-full py-1.5 bg-form rounded-[8px] px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                className="block w-full py-1.5 bg-form rounded-[8px] px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                 rows={6}
                 {...register("description", { required: true })}
               />
@@ -427,12 +511,12 @@ export function Form() {
             <label className="block text-sm font-bold leading-6 text-gray-900">
               Fotos precisaram pegar o ângulo do carro inteiro*
             </label>
-            <div className="mt-2 flex justify-center bg-form rounded-[8px] rounded-lg border border-dashed border-gray-900/25 px-6 py-10 bg-green-200">
+            <div className="mt-2 flex justify-center bg-form rounded-[8px]  border border-dashed border-gray-900/25 px-6 py-10 bg-[#15803D29]">
               <label
                 htmlFor="file-upload"
                 className="relative cursor-pointer rounded-md bg-white font-semibold text-green-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-green-900 focus-within:ring-offset-2 hover:text-green-500"
               >
-                <Image className="h-12 w-12 text-green-500 bg-green-200" />
+                <Image className="h-12 w-12 text-green-500 bg-[#15803D29]" />
                 <input
                   id="file-upload"
                   {...register("images")}
@@ -458,15 +542,14 @@ export function Form() {
           </div>
           <button
             type="submit"
-            className={`mt-6 w-full rounded-md border border-transparent bg-green-700 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-500 ${
-              loading && "cursor-not-allowed"
-            }`}
+            className={`mt-6 w-full rounded-md border border-transparent bg-green-700 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-500 ${loading && "cursor-not-allowed"
+              }`}
             disabled={loading}
           >
             Enviar
           </button>
         </form>
-      </Layout>
+      </Layout >
     </>
   );
 }

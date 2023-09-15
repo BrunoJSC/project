@@ -4,3 +4,6 @@ export function formatPrice(price: number) {
     currency: "BRL",
   }).format(price);
 }
+
+export const format = (value: number) =>
+  value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");

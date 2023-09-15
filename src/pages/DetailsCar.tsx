@@ -7,6 +7,11 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 
+interface AcessoriesProps {
+  value: string;
+  label: string;
+}
+
 interface CarsProps {
   id: string;
   model: string;
@@ -23,6 +28,7 @@ interface CarsProps {
   yearFactory: number;
   yearModification: number;
   images: string[];
+  acessories: AcessoriesProps[];
 }
 
 function CardImage({ images, name }: { images: string[]; name: string }) {
@@ -41,7 +47,7 @@ function CardImage({ images, name }: { images: string[]; name: string }) {
   };
 
   return (
-    <div className="w-full h-[500px] bg-blue-500 rounded-lg relative">
+    <div className="w-[1190px] h-[600px] mx-auto rounded-lg relative">
       <button
         className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-40 text-white px-3 py-2 rounded-full"
         onClick={prevSlide}
@@ -55,7 +61,7 @@ function CardImage({ images, name }: { images: string[]; name: string }) {
         <ArrowRight size={24} />
       </button>
       <img
-        className="w-full h-full object-cover object-center"
+        className="w-full h-full object-cover object-center bg-center rounded-lg"
         src={images[slideIndex]}
         alt={name}
       />
@@ -104,37 +110,45 @@ export function DetailsCar() {
                     {car.fuel}
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    <div className="bg-blue-500 p-4 rounded-lg">
+                    <div className="p-4 rounded-lg">
                       <p className="text-[#282828] font-semibold">Cidade</p>
-                      <p>{car.location}</p>
+                      <p className="text-green-600 font-bold">{car.location}</p>
                     </div>
-                    <div className="bg-blue-500 p-4 rounded-lg">
+                    <div className="p-4 rounded-lg">
                       <p className="text-[#282828] font-semibold">
                         Kilometragem
                       </p>
-                      <p>{car.km}</p>
+                      <p className="text-green-600 font-bold">{car.km}</p>
                     </div>
-                    <div className="bg-blue-500 p-4 rounded-lg">
+                    <div className="p-4 rounded-lg">
                       <p className="text-[#282828] font-semibold">Ano</p>
-                      <p>{car.yearFactory}</p>
+                      <p className="text-green-600 font-bold">
+                        {car.yearFactory}
+                      </p>
                     </div>
-                    <div className="bg-blue-500 p-4 rounded-lg">
+                    <div className="p-4 rounded-lg">
                       <p className="text-[#282828] font-semibold">Cambio</p>
-                      <p>{car.exchange}</p>
+                      <p className="text-green-600 font-bold">{car.exchange}</p>
                     </div>
-                    <div className="bg-blue-500 p-4 rounded-lg">
+                    <div className="p-4 rounded-lg">
                       <p className="text-[#282828] font-semibold">
                         Combustivel
                       </p>
-                      <p>{car.fuel}</p>
+                      <p className="text-green-600 font-bold">{car.fuel}</p>
                     </div>
-                    <div className="bg-blue-500 p-4 rounded-lg">
+                    <div className="p-4 rounded-lg">
                       <p className="text-[#282828] font-semibold">Cor</p>
-                      <p>{car.color}</p>
+                      <p className="text-green-600 font-bold">{car.color}</p>
                     </div>
                   </div>
 
-                  <div className="bg-green-800 mt-5 p-4 rounded-lg">
+                  <div className="bg-green-500 h-[200px] w-full">
+                    {car?.acessories?.map((acessorie) => (
+                      <div key={acessorie.value}>{acessorie.label}</div>
+                    ))}
+                  </div>
+
+                  <div className=" mt-5 p-4 rounded-lg">
                     <h2 className="text-xl lg:text-2xl font-bold text-[#282828]">
                       Sobre o carro
                     </h2>

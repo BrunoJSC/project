@@ -208,8 +208,9 @@ interface CarsProps {
 
 export function CarsPage() {
   const [data, setData] = useState<CarsProps[]>([]);
+  const [search, setSearch] = useState<string>("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedModel, setSelectedModel] = useState("");
+
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedYearFactory, setSelectedYearFactory] = useState("");
   const [selectedYearModification, setSelectedYearModification] = useState("");
@@ -255,9 +256,8 @@ export function CarsPage() {
           </div>
           {/* Menu lateral em desktop */}
           <div
-            className={`${
-              isMenuOpen ? "block" : "hidden"
-            } md:block bg-green-700 w-[500px] h-[1986px] p-4 transition-transform duration-300 ease-in-out`}
+            className={`${isMenuOpen ? "block" : "hidden"
+              } md:block bg-green-700 w-[500px] h-[1986px] p-4 transition-transform duration-300 ease-in-out`}
           >
             <h1 className="text-white text-[32px] font-bold mb-4">Filtros</h1>
             <div>
@@ -270,8 +270,8 @@ export function CarsPage() {
               <input
                 className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                 id="modelSelect"
-                value={selectedModel}
-                onChange={(e) => setSelectedModel(e.target.value)}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
             </div>
 
@@ -547,7 +547,7 @@ export function CarsPage() {
                 {accessories.map((accessory) => (
                   <div
                     key={accessory.value}
-                    className="bg-red-500 flex items-center gap-2"
+                    className="flex items-center gap-2"
                   >
                     <input
                       type="checkbox"
@@ -556,7 +556,9 @@ export function CarsPage() {
                       value={accessory.value}
                       onChange={(e) => setSelectedAccessories(e.target.value)}
                     />
-                    <label className="text-[12px]">{accessory.label}</label>
+                    <label className="text-[12px] text-white font-bold">
+                      {accessory.label}
+                    </label>
                   </div>
                 ))}
               </div>
@@ -589,13 +591,13 @@ export function CarsPage() {
             {data
               .filter(
                 (car) =>
-                  (!selectedModel || car.model === selectedModel) &&
+                  car.model.toLowerCase().includes(search.toLowerCase()) &&
                   (!selectedBrand || car.brand === selectedBrand) &&
                   (!selectedYearFactory ||
                     String(car.yearFactory) === selectedYearFactory) &&
                   (!selectedYearModification ||
                     String(car.yearModification) ===
-                      selectedYearModification) &&
+                    selectedYearModification) &&
                   (!selectedKmStart || car.km >= parseFloat(selectedKmStart)) &&
                   (!selectedKmEnd || car.km <= parseFloat(selectedKmEnd)) &&
                   (!selectedCity || car.location === selectedCity) &&
@@ -613,28 +615,40 @@ export function CarsPage() {
                   to={`/carros/detalhes/${car.id}`}
                   state={{ data: car }}
                   key={car.id}
-                  className="border bg-white rounded-md flex"
+                  className=" bg-white flex"
                 >
-                  <div className="h-[223px] md:w-[320px] bg-green-500">
+                  <div className="h-[223px] md:w-[304px] rounded-l-lg">
                     <img
                       src={car.images[0]}
                       alt=""
-                      className="h-full w-full object-cover rounded-lg"
+                      className="h-full w-full object-cover rounded-l-lg"
                     />
                   </div>
 
-                  <div className="bg-[#F2F2F2] flex flex-col justify-between p-2 w-full">
+                  <div className="bg-[#F2F2F2] flex flex-col justify-between p-2 w-full rounded-r-lg">
                     <div>
                       <h1 className="font-bold text-[36px] text-[#15803D]">
                         {car.brand} {car.model}
                       </h1>
-                      <p>{car.location}</p>
-                      <p>Ano: {car.yearFactory}</p>
-                      <p>KM: {car.km}</p>
-                      <p>Tipo de Combustível: {car.fuel}</p>
+                      <p className="text-[14px] font-medium">{car.location}</p>
+                      <p className="text-[14px] font-medium">
+                        Ano: {car.yearFactory}
+                      </p>
+                      <p className="text-[14px] font-medium">KM: {car.km}</p>
+                      <p className="text-[14px] font-medium">
+                        Tipo de Combustível: {car.fuel}
+                      </p>
                     </div>
                     <div>
-                      <p>Valor: {formatPrice(car.price)}</p>
+                      <p className="font-bold text-[14px] text-[#1E1E1E]">
+                        Valor: {car.price}
+                      </p>
+                    </div>
+
+                    <div>
+                      <button className="py-[12px] px-[8px] bg-[#15803D] font-bold text-white rounded-lg hover:bg-green-900">
+                        48x de R$ 137.136,000 á parcela
+                      </button>
                     </div>
                   </div>
                 </Link>
