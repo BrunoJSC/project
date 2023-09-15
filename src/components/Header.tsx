@@ -25,7 +25,7 @@ export function Header() {
             Carros
           </a>
           <a
-            href="#"
+            href="/motos"
             className="p-2 text-[#282828] hover:text-green-500 font-bold text-[14px] md:text-base"
           >
             Motos

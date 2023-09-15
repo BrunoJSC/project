@@ -14,6 +14,7 @@ import { CreateCar } from "./pages/CreateCar";
 import { NotFound } from "./pages/404";
 import { DetailsCar } from "./pages/DetailsCar";
 import { Form } from "./pages/Form";
+import { BikePage } from "./pages/BikePage";
 
 export default function App() {
   return (
@@ -89,6 +90,15 @@ export default function App() {
             element={
               <PublicRoute>
                 <DetailsCar />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            path="/motos"
+            element={
+              <PublicRoute>
+                <BikePage />
               </PublicRoute>
             }
           />
