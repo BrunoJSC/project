@@ -251,13 +251,13 @@ export function CarsPage() {
               className="bg-green-700 hover:bg-green-900 text-white p-2 rounded-md mb-4"
               onClick={toggleMenu}
             >
-              {isMenuOpen ? "Fechar Menu" : "Abrir Menu"}
+              {isMenuOpen ? "Fechar filtros" : "Abrir filtros"}
             </button>
           </div>
           {/* Menu lateral em desktop */}
           <div
             className={`${isMenuOpen ? "block" : "hidden"
-              } md:block bg-green-700 w-[500px] h-[1986px] p-4 transition-transform duration-300 ease-in-out`}
+              } md:block bg-green-700 max-w-[500px] h-[1986px] p-4 transition-transform duration-300 ease-in-out`}
           >
             <h1 className="text-white text-[32px] font-bold mb-4">Filtros</h1>
             <div>
@@ -596,57 +596,57 @@ export function CarsPage() {
                   (!selectedYearFactory ||
                     String(car.yearFactory) === selectedYearFactory) &&
                   (!selectedYearModification ||
-                    String(car.yearModification) ===
-                    selectedYearModification) &&
+                    String(car.yearModification) === selectedYearModification) &&
                   (!selectedKmStart || car.km >= parseFloat(selectedKmStart)) &&
                   (!selectedKmEnd || car.km <= parseFloat(selectedKmEnd)) &&
                   (!selectedCity || car.location === selectedCity) &&
                   (filteredPrice === 0 ||
-                    (car.price <= filteredPrice &&
-                      car.price >= filteredPrice)) &&
+                    (car.price <= filteredPrice && car.price >= filteredPrice)) &&
                   (!selectedExchange || car.exchange === selectedExchange) &&
                   (!selectedDirection || car.direction === selectedDirection) &&
                   (!selectedFuel || car.fuel === selectedFuel) &&
-                  (!selectedDoors ||
-                    Number(car.doors) === Number(selectedDoors)),
+                  (!selectedDoors || Number(car.doors) === Number(selectedDoors))
               )
               .map((car) => (
                 <Link
                   to={`/carros/detalhes/${car.id}`}
                   state={{ data: car }}
                   key={car.id}
-                  className=" bg-white flex"
+                  className="flex flex-col md:flex-row bg-white mb-4"
                 >
-                  <div className="h-[223px] md:w-[304px] rounded-l-lg">
+                  <div className="h-[223px] md:w-[304px] md:rounded-l-lg">
                     <img
                       src={car.images[0]}
                       alt=""
-                      className="h-full w-full object-cover rounded-l-lg"
+                      className="h-full w-full object-cover md:rounded-l-lg"
                     />
                   </div>
 
-                  <div className="bg-[#F2F2F2] flex flex-col justify-between p-2 w-full rounded-r-lg">
+                  <div className="bg-[#F2F2F2] flex flex-col justify-between p-2 w-full rounded-r-lg md:rounded-l-none md:rounded-r-lg md:flex-grow">
                     <div>
-                      <h1 className="font-bold text-[36px] text-[#15803D]">
+                      <h1 className="font-bold text-[20px] md:text-[36px] text-[#15803D]">
                         {car.brand} {car.model}
                       </h1>
-                      <p className="text-[14px] font-medium">{car.location}</p>
-                      <p className="text-[14px] font-medium">
+                      <p className="text-[12px] md:text-[14px] font-medium">
+                        {car.location}
+                      </p>
+                      <p className="text-[12px] md:text-[14px] font-medium">
                         Ano: {car.yearFactory}
                       </p>
-                      <p className="text-[14px] font-medium">KM: {car.km}</p>
-                      <p className="text-[14px] font-medium">
+                      <p className="text-[12px] md:text-[14px] font-medium">
+                        KM: {car.km}
+                      </p>
+                      <p className="text-[12px] md:text-[14px] font-medium">
                         Tipo de Combustível: {car.fuel}
                       </p>
                     </div>
                     <div>
-                      <p className="font-bold text-[14px] text-[#1E1E1E]">
+                      <p className="font-bold text-[12px] md:text-[14px] text-[#1E1E1E]">
                         Valor: {car.price}
                       </p>
                     </div>
-
                     <div>
-                      <button className="py-[12px] px-[8px] bg-[#15803D] font-bold text-white rounded-lg hover:bg-green-900">
+                      <button className="py-[8px] px-[8px] md:py-[12px] md:px-[8px] bg-[#15803D] font-bold text-white rounded-lg hover:bg-green-900">
                         48x de R$ 137.136,000 á parcela
                       </button>
                     </div>

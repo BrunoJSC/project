@@ -33,7 +33,7 @@ export function Header() {
         {/* Menu para telas médias e maiores */}
         <nav
           className={`${menuOpen ? "block" : "hidden"
-            } md:block flex-grow pb-4 md:pb-0 md:flex md:justify-end md:flex-row`}
+            } md:block flex-grow pb-4 md:pb-0 md:flex md:justify-end md:flex-row mt-5`}
         >
           <ul className="md:flex md:space-x-4 items-center">
             <li>
