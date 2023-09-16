@@ -118,13 +118,6 @@ const advertisers = [
   { value: "Repasse", label: "Repasse" },
 ];
 
-const exchange = [
-  { value: "manual", label: "Manual" },
-  { value: "automatic", label: "Automático" },
-  { value: "semi-automatic", label: "Semi-Automático" },
-  { value: "cvvt", label: "CVVT" },
-];
-
 const direction = [
   { value: "Manual", label: "manual" },
   { value: "Eletrica", label: "eletrica" },
@@ -181,7 +174,6 @@ export function BikePage() {
   const [selectedExchange, setSelectedExchange] = useState("");
   const [selectedDirection, setSelectedDirection] = useState("");
   const [selectedFuel, setSelectedFuel] = useState("");
-  const [selectedDoors, setSelectedDoors] = useState("");
   const [selectedTypeBody, setSelectedTypeBody] = useState("");
 
   useEffect(() => {
@@ -210,13 +202,13 @@ export function BikePage() {
               className="bg-green-700 hover:bg-green-900 text-white p-2 rounded-md mb-4"
               onClick={toggleMenu}
             >
-              {isMenuOpen ? "Fechar Menu" : "Abrir Menu"}
+              {isMenuOpen ? "Fechar filtros" : "Abrir filtros"}
             </button>
           </div>
           {/* Menu lateral em desktop */}
           <div
-            className={`${isMenuOpen ? "block mb-10" : "hidden"
-              } md:block bg-green-700 max-w-[500px] h-[986px] p-4 transition-transform duration-300 ease-in-out`}
+            className={`${isMenuOpen ? "block" : "hidden"
+              } md:block bg-green-700 max-w-[500px] h-[1986px] p-4 transition-transform duration-300 ease-in-out`}
           >
             <h1 className="text-white text-[32px] font-bold mb-4">Filtros</h1>
             <div>
@@ -319,137 +311,116 @@ export function BikePage() {
                   ))}
                 </select>
               </div>
-            </div>
 
-            <div className="mt-4 grid grid-cols-2 gap-4">
-              <div>
-                <label
-                  htmlFor="km"
-                  className="block text-white text-[16px] mb-2"
-                >
-                  KM Inicial
-                </label>
-                <select
-                  id="km"
-                  value={selectedKmStart}
-                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
-                  onChange={(e) => setSelectedKmStart(e.target.value)}
-                >
-                  <option value="">Selecione um KM inicial</option>
-                  {kmStart.map((km) => (
-                    <option key={km.value} value={km.value}>
-                      {km.label}
-                    </option>
-                  ))}
-                </select>
+
+              <div className="mt-4 grid grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="km"
+                    className="block text-white text-[16px] mb-2"
+                  >
+                    KM Inicial
+                  </label>
+                  <select
+                    id="km"
+                    value={selectedKmStart}
+                    className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
+                    onChange={(e) => setSelectedKmStart(e.target.value)}
+                  >
+                    <option value="">Selecione um KM inicial</option>
+                    {kmStart.map((km) => (
+                      <option key={km.value} value={km.value}>
+                        {km.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="km"
+                    className="block text-white text-[16px] mb-2"
+                  >
+                    KM Final
+                  </label>
+                  <select
+                    id="km"
+                    value={selectedKmEnd}
+                    className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
+                    onChange={(e) => setSelectedKmEnd(e.target.value)}
+                  >
+                    <option value="">Selecione um KM final</option>
+                    {kmEnd.map((km) => (
+                      <option key={km.value} value={km.value}>
+                        {km.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
-              <div>
-                <label
-                  htmlFor="km"
-                  className="block text-white text-[16px] mb-2"
-                >
-                  KM Final
-                </label>
-                <select
-                  id="km"
-                  value={selectedKmEnd}
-                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
-                  onChange={(e) => setSelectedKmEnd(e.target.value)}
-                >
-                  <option value="">Selecione um KM final</option>
-                  {kmEnd.map((km) => (
-                    <option key={km.value} value={km.value}>
-                      {km.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <label
-                htmlFor="city"
-                className="block text-white text-[16px] mb-2"
-              >
-                Cidade
-              </label>
-              <select
-                id="city"
-                value={selectedCity}
-                className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
-                onChange={(e) => setSelectedCity(e.target.value)}
-              >
-                <option value="">Selecione uma cidade</option>
-                {data.map((car) => (
-                  <option key={car.id} value={car.location}>
-                    {car.location}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <input
-                value={filteredPrice}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setFilteredPrice(Number(e.target.value))
-                }
-                min={0}
-                max={200000}
-                type="range"
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-10"
-              />
-              <strong className="text-white text-[16px]">
-                {formatPrice(filteredPrice)}
-              </strong>
-            </div>
-
-            <div>
               <div className="mt-4">
                 <label
-                  htmlFor="advertisers"
-                  className="text-white  text-[16px] mb-2"
-                >
-                  Anunciantes
-                </label>
-                <select
-                  id="advertisers"
-                  value={selectedBrand}
-                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
-                  onChange={(e) => setSelectedBrand(e.target.value)}
-                >
-                  <option value="">Selecione um anunciante</option>
-                  {advertisers.map((ad) => (
-                    <option key={ad.value} value={ad.value}>
-                      {ad.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="mt-4 grid grid-cols-2 gap-4">
-              <div>
-                <label
-                  htmlFor="exchange"
+                  htmlFor="city"
                   className="block text-white text-[16px] mb-2"
                 >
-                  Cambio
+                  Cidade
                 </label>
                 <select
-                  id="exchange"
-                  value={selectedExchange}
+                  id="city"
+                  value={selectedCity}
                   className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
-                  onChange={(e) => setSelectedExchange(e.target.value)}
+                  onChange={(e) => setSelectedCity(e.target.value)}
                 >
-                  <option value="">Selecione um KM inicial</option>
-                  {exchange.map((exchange) => (
-                    <option key={exchange.value} value={exchange.value}>
-                      {exchange.label}
+                  <option value="">Selecione uma cidade</option>
+                  {data.map((car) => (
+                    <option key={car.id} value={car.location}>
+                      {car.location}
                     </option>
                   ))}
                 </select>
               </div>
+
+              <div>
+                <input
+                  value={filteredPrice}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                    setFilteredPrice(Number(e.target.value))
+                  }
+                  min={0}
+                  max={200000}
+                  type="range"
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-10"
+                />
+                <strong className="text-white text-[16px]">
+                  {formatPrice(filteredPrice)}
+                </strong>
+              </div>
+
+              <div>
+                <div className="mt-4">
+                  <label
+                    htmlFor="advertisers"
+                    className="text-white  text-[16px] mb-2"
+                  >
+                    Anunciantes
+                  </label>
+                  <select
+                    id="advertisers"
+                    value={selectedBrand}
+                    className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
+                    onChange={(e) => setSelectedBrand(e.target.value)}
+                  >
+                    <option value="">Selecione um anunciante</option>
+                    {advertisers.map((ad) => (
+                      <option key={ad.value} value={ad.value}>
+                        {ad.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
 
               <div>
                 <label
@@ -496,7 +467,9 @@ export function BikePage() {
             </div>
           </div>
 
-          <div className="md:col-span-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full overflow-auto">
+
+
+          <div className="md:col-span-1 grid grid-cols-1 md:grid-cols-1 gap-2 w-full overflow-auto">
             {data
               .filter(
                 (car) =>
@@ -513,28 +486,26 @@ export function BikePage() {
                     (car.price <= filteredPrice && car.price >= filteredPrice)) &&
                   (!selectedExchange || car.exchange === selectedExchange) &&
                   (!selectedDirection || car.direction === selectedDirection) &&
-                  (!selectedFuel || car.fuel === selectedFuel) &&
-                  (!selectedDoors ||
-                    Number(car.doors) === Number(selectedDoors))
+                  (!selectedFuel || car.fuel === selectedFuel)
               )
               .map((car) => (
                 <Link
                   to={`/carros/detalhes/${car.id}`}
                   state={{ data: car }}
                   key={car.id}
-                  className="bg-white flex flex-col md:flex-row"
+                  className="flex flex-col md:flex-row bg-white mb-4"
                 >
-                  <div className="md:w-[304px] rounded-l-lg">
+                  <div className="h-[223px] md:w-[304px] md:rounded-l-lg">
                     <img
                       src={car.images[0]}
                       alt=""
-                      className="h-[223px] md:h-[200px] w-full object-cover rounded-l-lg"
+                      className="h-full w-full object-cover md:rounded-l-lg"
                     />
                   </div>
 
-                  <div className="bg-[#F2F2F2] flex flex-col justify-between p-2 w-full rounded-r-lg mt-2 md:mt-0">
+                  <div className="bg-[#F2F2F2] flex flex-col justify-between p-2 w-full rounded-r-lg md:rounded-l-none md:rounded-r-lg md:flex-grow">
                     <div>
-                      <h1 className="font-bold text-[20px] md:text-[24px] text-[#15803D]">
+                      <h1 className="font-bold text-[20px] md:text-[36px] text-[#15803D]">
                         {car.brand} {car.model}
                       </h1>
                       <p className="text-[12px] md:text-[14px] font-medium">
@@ -551,7 +522,7 @@ export function BikePage() {
                       </p>
                     </div>
                     <div>
-                      <p className="font-bold text-[14px] text-[#1E1E1E]">
+                      <p className="font-bold text-[12px] md:text-[14px] text-[#1E1E1E]">
                         Valor: {car.price}
                       </p>
                     </div>
@@ -564,9 +535,10 @@ export function BikePage() {
                 </Link>
               ))}
           </div>
-        </div>
-      </Layout>
+        </div >
+
+      </Layout >
       <Footer show={true} mt={6} smMt={32} />
-    </div>
+    </div >
   );
 }

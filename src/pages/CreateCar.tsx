@@ -316,7 +316,7 @@ export function CreateCar() {
             </div>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-3">
+              <div className="sm:col-span-6">
                 <label
                   htmlFor="mechanic"
                   className="block text-sm font-medium leading-6 text-gray-900"
@@ -334,26 +334,6 @@ export function CreateCar() {
                       <option>Bom</option>
                       <option>Ruim</option>
                     </select>
-                  </div>
-                </div>
-              </div>
-
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="plate"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Placa
-                </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <input
-                      type="text"
-                      id="plate"
-                      {...register("plate")}
-                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                      placeholder="Ex: ABC-1234"
-                    />
                   </div>
                 </div>
               </div>

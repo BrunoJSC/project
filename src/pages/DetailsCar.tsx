@@ -144,7 +144,7 @@ export function DetailsCar() {
 
                   <div className="bg-green-500 h-[200px] w-full">
                     {car?.acessories?.map((acessorie) => (
-                      <div key={acessorie.value}>{acessorie.label}</div>
+                      <p key={acessorie.value}>{acessorie.label}</p>
                     ))}
                   </div>
 
