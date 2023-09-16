@@ -6,6 +6,7 @@ import { Footer } from "../sections/Footer";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
+import { formatKm } from "../utils/formatPrice";
 
 interface AcessoriesProps {
   value: string;
@@ -118,7 +119,7 @@ export function DetailsCar() {
                       <p className="text-[#282828] font-semibold">
                         Kilometragem
                       </p>
-                      <p className="text-green-600 font-bold">{car.km}</p>
+                      <p className="text-green-600 font-bold">{formatKm(car.km)}</p>
                     </div>
                     <div className="p-4 rounded-lg">
                       <p className="text-[#282828] font-semibold">Ano</p>
