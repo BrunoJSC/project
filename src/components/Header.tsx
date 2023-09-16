@@ -65,7 +65,7 @@ export function Header() {
                 to="/contact"
                 className="p-2 text-[#282828] hover:text-green-500 font-bold text-[14px] md:text-base"
               >
-                Contato
+                Oficina de Dicas
               </Link>
             </li>
             <li>
@@ -73,7 +73,7 @@ export function Header() {
                 href="#"
                 className="p-2 text-[#282828] hover:text-green-500 font-bold text-[14px] md:text-base"
               >
-                Oficina de Dicas
+                Contato
               </a>
             </li>
           </ul>

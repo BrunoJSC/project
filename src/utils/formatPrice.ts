@@ -11,8 +11,8 @@ export const format = (value: number) =>
 export function formatKm(km: number): string {
   if (km >= 1000) {
     const formattedKm = km / 1000;
-    return `${formattedKm.toFixed(2)} km`;
+    return `${formattedKm.toFixed(3)}`;
   } else {
-    return km.toFixed(2) + " km";
+    return km.toFixed(2);
   }
 }

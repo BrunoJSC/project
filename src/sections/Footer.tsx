@@ -20,9 +20,8 @@ export function Footer({ show, mt, smMt }: FooterProps) {
     <footer className={`bg-[#1E1E1E] relative mt-${mt} sm:mt-${smMt} w-full`}>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-16 lg:px-8">
         <div
-          className={`${
-            show ? "block" : "hidden"
-          } w-full md:w-[60%] px-6 sm:px-24 absolute top-[-50px] left-1/2 transform -translate-x-1/2 mx-auto flex flex-col items-center gap-4 rounded-lg bg-green-700 p-6 sm:p-8 shadow-lg sm:flex-row sm:justify-evenly`}
+          className={`${show ? "block" : "hidden"
+            } w-full md:w-[60%] px-6 sm:px-24 absolute top-[-50px] left-1/2 transform -translate-x-1/2 mx-auto flex flex-col items-center gap-4 rounded-lg bg-green-700 p-6 sm:p-8 shadow-lg sm:flex-row sm:justify-evenly`}
         >
           <h2 className={`text-xl font-semibold text-white`}>SIGA A GENTE</h2>
           <ul className="flex gap-4">
@@ -79,7 +78,7 @@ export function Footer({ show, mt, smMt }: FooterProps) {
                   className="text-white   text-[16px] font-light leading-5 hover:text-green-800"
                   href="/"
                 >
-                  autonegocie@gmail.com
+                  contato@autonegocie.com.br
                 </a>
               </li>
             </ul>

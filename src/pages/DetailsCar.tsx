@@ -37,13 +37,13 @@ function CardImage({ images, name }: { images: string[]; name: string }) {
 
   const nextSlide = () => {
     setSlideIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1,
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   const prevSlide = () => {
     setSlideIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1,
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   };
 
@@ -102,7 +102,6 @@ export function DetailsCar() {
               {/* Coluna para informações do carro */}
               <div className="lg:col-span-2">
                 <div className="bg-white p-4 shadow-md rounded-xl">
-                  <div className="w-full bg-[#15803D] h-[73px] rounded-xl -mt-4 mb-4" />
                   <h1 className="font-bold text-3xl lg:text-4xl text-[#282828]">
                     {car.brand}{" "}
                     <span className="text-[#15803D]">{car.model}</span>
@@ -116,9 +115,7 @@ export function DetailsCar() {
                       <p className="text-green-600 font-bold">{car.location}</p>
                     </div>
                     <div className="p-4 rounded-lg">
-                      <p className="text-[#282828] font-semibold">
-                        Kilometragem
-                      </p>
+                      <p className="text-[#282828] font-semibold">KM</p>
                       <p className="text-green-600 font-bold">{formatKm(car.km)}</p>
                     </div>
                     <div className="p-4 rounded-lg">
@@ -128,7 +125,7 @@ export function DetailsCar() {
                       </p>
                     </div>
                     <div className="p-4 rounded-lg">
-                      <p className="text-[#282828] font-semibold">Cambio</p>
+                      <p className="text-[#282828] font-semibold">Câmbio</p>
                       <p className="text-green-600 font-bold">{car.exchange}</p>
                     </div>
                     <div className="p-4 rounded-lg">

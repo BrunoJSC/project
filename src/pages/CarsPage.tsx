@@ -4,7 +4,7 @@ import { db } from "../firebase";
 import { Layout } from "../layout/Layout";
 import { Header } from "../components/Header";
 import { Footer } from "../sections/Footer";
-import { formatPrice } from "../utils/formatPrice";
+import { format, formatPrice } from "../utils/formatPrice";
 import { Link } from "react-router-dom";
 
 const brands = [
@@ -50,72 +50,9 @@ const yearsFactory = [
   { value: 2023, label: "2023" },
 ];
 
-const yearsModification = [
-  { value: 2000, label: "2000" },
-  { value: 2001, label: "2001" },
-  { value: 2002, label: "2002" },
-  { value: 2003, label: "2003" },
-  { value: 2004, label: "2004" },
-  { value: 2005, label: "2005" },
-  { value: 2006, label: "2006" },
-  { value: 2007, label: "2007" },
-  { value: 2008, label: "2008" },
-  { value: 2009, label: "2009" },
-  { value: 2010, label: "2010" },
-  { value: 2011, label: "2011" },
-  { value: 2012, label: "2012" },
-  { value: 2013, label: "2013" },
-  { value: 2014, label: "2014" },
-  { value: 2015, label: "2015" },
-  { value: 2016, label: "2016" },
-  { value: 2017, label: "2017" },
-  { value: 2018, label: "2018" },
-  { value: 2019, label: "2019" },
-  { value: 2020, label: "2020" },
-  { value: 2021, label: "2021" },
-  { value: 2022, label: "2022" },
-  { value: 2023, label: "2023" },
-];
-
-const kmStart = [
-  { value: 0, label: "0" },
-  { value: 1, label: "1000" },
-  { value: 2, label: "2000" },
-  { value: 3, label: "3000" },
-  { value: 4, label: "4000" },
-  { value: 5, label: "5000" },
-  { value: 6, label: "6000" },
-  { value: 7, label: "7000" },
-  { value: 8, label: "8000" },
-  { value: 9, label: "9000" },
-  { value: 10, label: "10000" },
-  { value: 11, label: "11000" },
-  { value: 12, label: "12000" },
-  { value: 13, label: "13000" },
-];
-
-const kmEnd = [
-  { value: 0, label: "0" },
-  { value: 1, label: "1000" },
-  { value: 2, label: "2000" },
-  { value: 3, label: "3000" },
-  { value: 4, label: "4000" },
-  { value: 5, label: "5000" },
-  { value: 6, label: "6000" },
-  { value: 7, label: "7000" },
-  { value: 8, label: "8000" },
-  { value: 9, label: "9000" },
-  { value: 10, label: "10000" },
-  { value: 11, label: "11000" },
-  { value: 12, label: "12000" },
-  { value: 13, label: "13000" },
-];
-
 const advertisers = [
   { value: "Particular", label: "Particular" },
-  { value: "Usado", label: "Usado" },
-  { value: "Novo", label: "Novo" },
-  { value: "Repasse", label: "Repasse" },
+  { value: "Concessionária", label: "Concessionária" },
 ];
 
 const exchange = [
@@ -126,18 +63,18 @@ const exchange = [
 ];
 
 const direction = [
-  { value: "Manual", label: "manual" },
-  { value: "Eletrica", label: "eletrica" },
-  { value: "Hidraulica", label: "hidraulica" },
+  { value: "manual", label: "Manual" },
+  { value: "eletrica", label: "Elétrica" },
+  { value: "hidraulica", label: "Hidráulica" },
 ];
 
 const fuel = [
-  { value: "Gasolina", label: "Gasolina" },
-  { value: "Alcool", label: "Alcool" },
-  { value: "Diesel", label: "Diesel" },
-  { value: "Flex", label: "Flex" },
-  { value: "GNV", label: "GVN" },
-  { value: "Hibrido", label: "Hibrido" },
+  { value: "gasolina", label: "Gasolina" },
+  { value: "alcool", label: "Alcool" },
+  { value: "diesel", label: "Diesel" },
+  { value: "flex", label: "Flex" },
+  { value: "gNV", label: "GVN" },
+  { value: "hibrido", label: "Hibrido" },
 ];
 
 const accessories = [
@@ -183,7 +120,7 @@ const doors = [
 const body = [
   { value: "seda", label: "Sedan" },
   { value: "hatchback", label: "Hatchback" },
-  { value: "utilitario", label: "Utilitario" },
+  { value: "utilitario", label: "Utilitário" },
   { value: "suv", label: "SUV" },
   { value: "van", label: "Van" },
 ];
@@ -214,8 +151,6 @@ export function CarsPage() {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedYearFactory, setSelectedYearFactory] = useState("");
   const [selectedYearModification, setSelectedYearModification] = useState("");
-  const [selectedKmStart, setSelectedKmStart] = useState("");
-  const [selectedKmEnd, setSelectedKmEnd] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [filteredPrice, setFilteredPrice] = useState<number>(0);
   const [selectedExchange, setSelectedExchange] = useState("");
@@ -257,7 +192,7 @@ export function CarsPage() {
           {/* Menu lateral em desktop */}
           <div
             className={`${isMenuOpen ? "block" : "hidden"
-              } md:block bg-green-700 max-w-[500px] h-[1986px] p-4 transition-transform duration-300 ease-in-out`}
+              } md:block bg-green-700 max-w-[500px] h-[1986px] p-4 transition-transform duration-300 ease-in-out rounded-lg`}
           >
             <h1 className="text-white text-[32px] font-bold mb-4">Filtros</h1>
             <div>
@@ -265,7 +200,7 @@ export function CarsPage() {
                 htmlFor="modelSelect"
                 className="block mb-2 text-white text-[16px]"
               >
-                Modelo de Carro
+                Busca
               </label>
               <input
                 className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
@@ -278,17 +213,15 @@ export function CarsPage() {
             <div className="mt-4">
               <label
                 htmlFor="typeFuel"
-                className="block mb-2 text-white  text-[16px]"
-              >
-                Carroceria
-              </label>
+                className="block mb-2 text-white text-[16px]"
+              ></label>
               <select
                 id="typeBody"
                 value={selectedFuel}
                 className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                 onChange={(e) => setSelectedFuel(e.target.value)}
               >
-                <option value="">Selecione um tipo de combustível</option>
+                <option value="">Tipo</option>
                 {body.map((car) => (
                   <option key={car.value} value={car.value}>
                     {car.label}
@@ -298,16 +231,17 @@ export function CarsPage() {
             </div>
 
             <div className="mt-4">
-              <label htmlFor="brand" className="text-white  text-[16px] mb-2">
-                Marca
-              </label>
+              <label
+                htmlFor="brand"
+                className="text-white text-[16px] mb-2"
+              ></label>
               <select
                 id="brand"
                 value={selectedBrand}
                 className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                 onChange={(e) => setSelectedBrand(e.target.value)}
               >
-                <option value="">Selecione uma marca</option>
+                <option value="">Marca</option>
                 {brands.map((brand) => (
                   <option key={brand.value} value={brand.value}>
                     {brand.label}
@@ -321,39 +255,15 @@ export function CarsPage() {
                 <label
                   htmlFor="yearFactory"
                   className="block text-white text-[16px] mb-2"
-                >
-                  Ano inicial
-                </label>
+                ></label>
                 <select
                   id="yearFactory"
                   value={selectedYearFactory}
                   className="px-[14px] py-[7px] bg-green-200 rounded-md cols-span-2 w-full"
                   onChange={(e) => setSelectedYearFactory(e.target.value)}
                 >
-                  <option value="">Selecione um ano de fabricação</option>
+                  <option value="">Ano inicial</option>
                   {yearsFactory.map((year) => (
-                    <option key={year.value} value={year.value}>
-                      {year.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="yearModification"
-                  className="block text-white  text-[16px] mb-2"
-                >
-                  Ano de final
-                </label>
-                <select
-                  id="yearModification"
-                  value={selectedYearModification}
-                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
-                  onChange={(e) => setSelectedYearModification(e.target.value)}
-                >
-                  <option value="">Selecione um ano de modificação</option>
-                  {yearsModification.map((year) => (
                     <option key={year.value} value={year.value}>
                       {year.label}
                     </option>
@@ -363,48 +273,9 @@ export function CarsPage() {
             </div>
 
             <div className="mt-4 grid grid-cols-2 gap-4">
-              <div>
-                <label
-                  htmlFor="km"
-                  className="block text-white text-[16px] mb-2"
-                >
-                  KM Inicial
-                </label>
-                <select
-                  id="km"
-                  value={selectedKmStart}
-                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
-                  onChange={(e) => setSelectedKmStart(e.target.value)}
-                >
-                  <option value="">Selecione um KM inicial</option>
-                  {kmStart.map((km) => (
-                    <option key={km.value} value={km.value}>
-                      {km.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="km"
-                  className="block text-white text-[16px] mb-2"
-                >
-                  KM Final
-                </label>
-                <select
-                  id="km"
-                  value={selectedKmEnd}
-                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
-                  onChange={(e) => setSelectedKmEnd(e.target.value)}
-                >
-                  <option value="">Selecione um KM final</option>
-                  {kmEnd.map((km) => (
-                    <option key={km.value} value={km.value}>
-                      {km.label}
-                    </option>
-                  ))}
-                </select>
+              <div className="flex items-center gap-2">
+                <input type="checkbox" name="" id="" />
+                <label className="text-white">Zero KM</label>
               </div>
             </div>
 
@@ -412,16 +283,14 @@ export function CarsPage() {
               <label
                 htmlFor="city"
                 className="block text-white text-[16px] mb-2"
-              >
-                Cidade
-              </label>
+              ></label>
               <select
                 id="city"
                 value={selectedCity}
                 className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                 onChange={(e) => setSelectedCity(e.target.value)}
               >
-                <option value="">Selecione uma cidade</option>
+                <option value="">Cidade</option>
                 {data.map((car) => (
                   <option key={car.id} value={car.location}>
                     {car.location}
@@ -450,17 +319,15 @@ export function CarsPage() {
               <div className="mt-4">
                 <label
                   htmlFor="advertisers"
-                  className="text-white  text-[16px] mb-2"
-                >
-                  Anunciantes
-                </label>
+                  className="text-white text-[16px] mb-2"
+                ></label>
                 <select
                   id="advertisers"
                   value={selectedBrand}
                   className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                   onChange={(e) => setSelectedBrand(e.target.value)}
                 >
-                  <option value="">Selecione um anunciante</option>
+                  <option value="">Tipo de anuncio</option>
                   {advertisers.map((ad) => (
                     <option key={ad.value} value={ad.value}>
                       {ad.label}
@@ -474,16 +341,14 @@ export function CarsPage() {
                 <label
                   htmlFor="exchange"
                   className="block text-white text-[16px] mb-2"
-                >
-                  Cambio
-                </label>
+                ></label>
                 <select
                   id="exchange"
                   value={selectedExchange}
                   className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                   onChange={(e) => setSelectedExchange(e.target.value)}
                 >
-                  <option value="">Selecione um KM inicial</option>
+                  <option value="">Câmbio</option>
                   {exchange.map((exchange) => (
                     <option key={exchange.value} value={exchange.value}>
                       {exchange.label}
@@ -496,16 +361,14 @@ export function CarsPage() {
                 <label
                   htmlFor="direction"
                   className="block text-white text-[16px] mb-2"
-                >
-                  Direção
-                </label>
+                ></label>
                 <select
                   id="direction"
                   value={selectedDirection}
                   className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                   onChange={(e) => setSelectedDirection(e.target.value)}
                 >
-                  <option value="">Selecione um KM final</option>
+                  <option value="">Direção</option>
                   {direction.map((direction) => (
                     <option key={direction.value} value={direction.value}>
                       {direction.label}
@@ -517,16 +380,17 @@ export function CarsPage() {
 
             <div>
               <div className="mt-4">
-                <label htmlFor="fuel" className="text-white  text-[16px] mb-2">
-                  Tipo de Combustivel
-                </label>
+                <label
+                  htmlFor="fuel"
+                  className="text-white text-[16px] mb-2"
+                ></label>
                 <select
                   id="fuel"
                   value={selectedBrand}
                   className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                   onChange={(e) => setSelectedBrand(e.target.value)}
                 >
-                  <option value="">Selecione um tipo de combustível</option>
+                  <option value="">Combustível</option>
                   {fuel.map((fuel) => (
                     <option key={fuel.value} value={fuel.value}>
                       {fuel.label}
@@ -541,7 +405,7 @@ export function CarsPage() {
                 htmlFor="accessories"
                 className="block text-white text-[16px] mb-2"
               >
-                acessorios
+                Acessórios
               </label>
               <div className="grid grid-cols-2 gap-4 w-full">
                 {accessories.map((accessory) => (
@@ -568,16 +432,14 @@ export function CarsPage() {
               <label
                 htmlFor="doors"
                 className="block text-white text-[20px] mb-2"
-              >
-                Portas
-              </label>
+              ></label>
               <select
                 id="doors"
                 value={selectedDoors}
                 className="px-[14px] py-[10px] bg-green-200 rounded-md w-full"
                 onChange={(e) => setSelectedDoors(e.target.value)}
               >
-                <option value="">Selecione uma porta</option>
+                <option value="">Portas</option>
                 {doors.map((car) => (
                   <option key={car.value} value={car.label}>
                     {car.label}
@@ -596,16 +458,17 @@ export function CarsPage() {
                   (!selectedYearFactory ||
                     String(car.yearFactory) === selectedYearFactory) &&
                   (!selectedYearModification ||
-                    String(car.yearModification) === selectedYearModification) &&
-                  (!selectedKmStart || car.km >= parseFloat(selectedKmStart)) &&
-                  (!selectedKmEnd || car.km <= parseFloat(selectedKmEnd)) &&
+                    String(car.yearModification) ===
+                    selectedYearModification) &&
                   (!selectedCity || car.location === selectedCity) &&
                   (filteredPrice === 0 ||
-                    (car.price <= filteredPrice && car.price >= filteredPrice)) &&
+                    (car.price <= filteredPrice &&
+                      car.price >= filteredPrice)) &&
                   (!selectedExchange || car.exchange === selectedExchange) &&
                   (!selectedDirection || car.direction === selectedDirection) &&
                   (!selectedFuel || car.fuel === selectedFuel) &&
-                  (!selectedDoors || Number(car.doors) === Number(selectedDoors))
+                  (!selectedDoors ||
+                    Number(car.doors) === Number(selectedDoors))
               )
               .map((car) => (
                 <Link
@@ -628,21 +491,24 @@ export function CarsPage() {
                         {car.brand} {car.model}
                       </h1>
                       <p className="text-[12px] md:text-[14px] font-medium">
+                        <span className="font-bold">Cidade:</span>{" "}
                         {car.location}
                       </p>
                       <p className="text-[12px] md:text-[14px] font-medium">
-                        Ano: {car.yearFactory}
+                        <span className="font-bold">Ano:</span>{" "}
+                        {car.yearFactory}
                       </p>
                       <p className="text-[12px] md:text-[14px] font-medium">
-                        KM: {car.km}
+                        <span className="font-bold">KM:</span> {car.km}
                       </p>
                       <p className="text-[12px] md:text-[14px] font-medium">
-                        Tipo de Combustível: {car.fuel}
+                        <span className="font-bold">Combustível:</span>{" "}
+                        {car.fuel}
                       </p>
                     </div>
                     <div>
                       <p className="font-bold text-[12px] md:text-[14px] text-[#1E1E1E]">
-                        Valor: {car.price}
+                        Valor: {formatPrice(car.price)}
                       </p>
                     </div>
                     <div>
