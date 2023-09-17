@@ -133,28 +133,26 @@ export function Form() {
 
   const handleFormSubmit: SubmitHandler<CreateCarPageProps> = async (data) => {
     emailjs.sendForm("service_fcsnapl", "template_vnqp85r", form.current, "LKMoT2R2yHx_zOxUI").then((result) => {
-      result.text
+      setLoading(true);
+      try {
+        console.log("Loading");
+        if (selectedFiles) {
+          const downloadURLs = await handleUpload();
+          data.images = downloadURLs;
+        }
+
+        await addDoc(collection(db, "cars"), data);
+        console.log("Document successfully written!");
+        reset();
+      } catch (error) {
+        console.error("Error adding car data to Firestore:", error);
+      } finally {
+        setLoading(false);
+      }
     }, (error) => {
       console.log(error.text)
     })
     console.log(data);
-
-    setLoading(true);
-    try {
-      console.log("Loading");
-      if (selectedFiles) {
-        const downloadURLs = await handleUpload();
-        data.images = downloadURLs;
-      }
-
-      await addDoc(collection(db, "cars"), data);
-      console.log("Document successfully written!");
-      reset();
-    } catch (error) {
-      console.error("Error adding car data to Firestore:", error);
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (
