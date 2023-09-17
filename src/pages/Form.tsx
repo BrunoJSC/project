@@ -29,6 +29,7 @@ interface CreateCarPageProps {
   typeFuel: string;
   exchange: string;
   description: string;
+  parcials: string;
   images: string[];
 }
 
@@ -54,6 +55,7 @@ const schema = z.object({
   km: z.number(),
   exchange: z.string(),
   description: z.string(),
+  parcials: z.string(),
   images: z.array(z.string()),
 });
 
@@ -187,6 +189,20 @@ export function Form() {
                   <input
                     className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6  bg-[#15803D29]"
                     {...register("email", { required: true })}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
+              <div className="col-span-6">
+                <label className="block text-sm font-bold leading-6 text-gray-900">
+                  Parcelas
+                </label>
+                <div className="mt-2">
+                  <input
+                    className="block w-full bg-['rgba(21, 128, 61, 0.16)] rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
+                    {...register("parcials", { required: true })}
                   />
                 </div>
               </div>

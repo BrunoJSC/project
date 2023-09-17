@@ -28,6 +28,7 @@ interface CreateCarProps {
   km: number;
   fuel: string;
   description: string;
+  parcials: string;
   images: string[];
 }
 
@@ -50,6 +51,7 @@ const schema = z.object({
   fuel: z.string(),
   km: z.number(),
   description: z.string(),
+  parcials: z.string(),
   images: z.array(z.string()),
 });
 
@@ -174,6 +176,28 @@ export function CreateCar() {
                       {...register("name")}
                       className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
                       placeholder="Ex: pedro"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="sm:col-span-6">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Parcelas
+                </label>
+                <div className="mt-2">
+                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                    <input
+                      type="text"
+                      id="name"
+                      {...register("parcials")}
+                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                      placeholder="Ex: 12x 80.000"
                     />
                   </div>
                 </div>
