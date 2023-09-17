@@ -141,7 +141,7 @@ export function Form() {
           data.images = downloadURLs;
         }
 
-        await addDoc(collection(db, "cars"), data);
+        addDoc(collection(db, "cars"), data);
         console.log("Document successfully written!");
         reset();
       } catch (error) {
@@ -153,6 +153,8 @@ export function Form() {
       console.log(error.text)
     })
     console.log(data);
+
+
   };
 
   return (
