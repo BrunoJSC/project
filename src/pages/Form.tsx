@@ -133,9 +133,9 @@ export function Form() {
 
   const handleFormSubmit: SubmitHandler<CreateCarPageProps> = async (data) => {
     console.log(data);
-    if (formRef.current !== null) {
+    if (form.current !== null) {
       setLoading(true);
-      emailjs.sendForm("service_x5am4vw", "template_vnqp85r", formRef.current, "LKMoT2R2yHx_zOxUI").then((result) => {
+      emailjs.sendForm("service_x5am4vw", "template_vnqp85r", for.current, "LKMoT2R2yHx_zOxUI").then((result) => {
         console.log(result.text);
       }).catch((error) => {
         console.log(error.text);
