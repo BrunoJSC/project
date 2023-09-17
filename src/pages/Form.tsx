@@ -132,7 +132,7 @@ export function Form() {
   };
 
   const handleFormSubmit: SubmitHandler<CreateCarPageProps> = async (data) => {
-    emailjs.sendForm("service_fcsnapl", "template_vnqp85r", form.current, "LKMoT2R2yHx_zOxUI").then((result) => {
+    emailjs.sendForm("service_x5am4vw", "template_vnqp85r", form.current, "LKMoT2R2yHx_zOxUI").then((result) => {
       result.text
     }, (error) => {
       console.log(error.text)
