@@ -62,7 +62,7 @@ export function Header() {
             </li>
             <li>
               <Link
-                to="/contact"
+                to="#"
                 className="p-2 text-[#282828] hover:text-green-500 font-bold text-[14px] md:text-base"
               >
                 Oficina de Dicas
@@ -70,7 +70,7 @@ export function Header() {
             </li>
             <li>
               <a
-                href="#"
+                href="/contact"
                 className="p-2 text-[#282828] hover:text-green-500 font-bold text-[14px] md:text-base"
               >
                 Contato

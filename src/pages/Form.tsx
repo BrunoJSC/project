@@ -1,11 +1,13 @@
 import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as z from "zod";
 import { db, storage } from "../firebase";
 import { Layout } from "../layout/Layout";
 import { Image } from "lucide-react";
+import emailjs from '@emailjs/browser';
+
 
 interface CreateCarPageProps {
   name: string;
@@ -97,6 +99,7 @@ const accessories = [
 export function Form() {
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
+  const form = useRef<formElement>(null);
 
   const {
     handleSubmit,
@@ -129,6 +132,11 @@ export function Form() {
   };
 
   const handleFormSubmit: SubmitHandler<CreateCarPageProps> = async (data) => {
+    emailjs.sendForm("service_fcsnapl", "template_vnqp85r", form.current, "LKMoT2R2yHx_zOxUI").then((result) => {
+      result.text
+    }, (error) => {
+      console.log(error.text)
+    })
     console.log(data);
 
     setLoading(true);
