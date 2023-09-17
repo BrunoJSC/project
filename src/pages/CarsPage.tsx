@@ -140,6 +140,7 @@ interface CarsProps {
   location: string;
   yearFactory: number;
   yearModification: number;
+  parcials: string;
   images: string[];
 }
 
@@ -513,7 +514,7 @@ export function CarsPage() {
                     </div>
                     <div>
                       <button className="py-[8px] px-[8px] md:py-[12px] md:px-[8px] bg-[#15803D] font-bold text-white rounded-lg hover:bg-green-900">
-                        48x de R$ 137.136,000 á parcela
+                        {car.parcials}
                       </button>
                     </div>
                   </div>
