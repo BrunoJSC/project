@@ -13,6 +13,6 @@ export function formatKm(km: number): string {
     const formattedKm = km / 1000;
     return `${formattedKm.toFixed(3)}`;
   } else {
-    return km.toFixed(2);
+    return km;
   }
 }

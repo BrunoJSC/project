@@ -1,13 +1,12 @@
 import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as z from "zod";
 import { db, storage } from "../firebase";
 import { Layout } from "../layout/Layout";
 import { Image } from "lucide-react";
-import emailjs from '@emailjs/browser';
-
+import emailjs from "@emailjs/browser";
 
 interface CreateCarPageProps {
   name: string;
@@ -99,7 +98,6 @@ const accessories = [
 export function Form() {
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
-  const form = useRef<formElement>(null);
 
   const {
     handleSubmit,
@@ -132,17 +130,47 @@ export function Form() {
   };
 
   const handleFormSubmit: SubmitHandler<CreateCarPageProps> = async (data) => {
-    console.log(data);
-    if (form.current !== null) {
-      setLoading(true);
-      emailjs.sendForm("service_x5am4vw", "template_vnqp85r", form.current, "LKMoT2R2yHx_zOxUI").then((result) => {
-        console.log(result.text);
-      }).catch((error) => {
-        console.log(error.text);
-        setLoading(false);
-      });
+    setLoading(true);
+    try {
+      console.log("Loading");
+      if (selectedFiles) {
+        const downloadURLs = await handleUpload();
+        data.images = downloadURLs;
+      }
 
+      const templateParams = {
+        to_name: data.name,
+        message: `
+        <html>
+          <body>
+            <p>Informações do carro:</p>
+            <ul>
+              <li>Nome: ${data.name}</li>
+              <li>Email: ${data.email}</li>
+              <li>Modelo: ${data.model}</li>
+              <!-- Outros campos do formulário aqui -->
+            </ul>
+            <p>Imagem do carro:</p>
+            <img src='${data.images[0]}' alt="Imagem do Carro">
+          </body>
+        </html>
+      `,
+      };
+
+      await emailjs.send(
+        "service_x5am4vw",
+        "template_vnqp85r",
+        templateParams,
+        "LKMoT2R2yHx_zOxUI",
+      );
+
+      await addDoc(collection(db, "cars"), data);
+      console.log("Document successfully written!");
       reset();
+    } catch (error) {
+      console.error("Error adding car data to Firestore:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -150,7 +178,8 @@ export function Form() {
     <>
       <Layout>
         <form
-          ref={form}
+          action="https://formsubmit.co/db@autonegocie.com.br"
+          method="POST"
           className="max-w-xl mx-auto mt-5 mb-24 p-4"
           onSubmit={handleSubmit(handleFormSubmit)}
         >
@@ -187,20 +216,6 @@ export function Form() {
                   <input
                     className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6  bg-[#15803D29]"
                     {...register("email", { required: true })}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
-              <div className="col-span-6">
-                <label className="block text-sm font-bold leading-6 text-gray-900">
-                  Parcelas
-                </label>
-                <div className="mt-2">
-                  <input
-                    className="block w-full bg-['rgba(21, 128, 61, 0.16)] rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
-                    {...register("parcials", { required: true })}
                   />
                 </div>
               </div>
@@ -282,7 +297,6 @@ export function Form() {
                   className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                   {...register("exchange", { required: true })}
                 >
-
                   <option>Selecione o tipo de cambio</option>
                   <option value="Manual">Manual</option>
                   <option value="eletrica">Eletrica</option>
@@ -290,7 +304,6 @@ export function Form() {
                 </select>
               </div>
             </div>
-
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
               <div>
@@ -372,7 +385,7 @@ export function Form() {
                   className="block w-full bg-form rounded-[8px] py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-[#15803D29]"
                   {...register("auction", { required: true })}
                 >
-                  <option>Selecione sim ou  não</option>
+                  <option>Selecione sim ou não</option>
                   <option value="sim">Sim</option>
                   <option value="Não">Não</option>
                 </select>
@@ -480,6 +493,7 @@ export function Form() {
                   {accessories.map((accessory) => (
                     <label key={accessory.value} className="flex items-center">
                       <input
+
                         type="checkbox"
                         id={accessory.value}
                         value={accessory.value}
@@ -563,7 +577,7 @@ export function Form() {
             Enviar
           </button>
         </form>
-      </Layout >
+      </Layout>
     </>
   );
 }

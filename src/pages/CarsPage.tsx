@@ -156,10 +156,22 @@ export function CarsPage() {
   const [filteredPrice, setFilteredPrice] = useState<number>(0);
   const [selectedExchange, setSelectedExchange] = useState("");
   const [selectedDirection, setSelectedDirection] = useState("");
-  const [selectedAccessories, setSelectedAccessories] = useState<string>("");
   const [selectedFuel, setSelectedFuel] = useState("");
   const [selectedDoors, setSelectedDoors] = useState("");
   const [selectedTypeBody, setSelectedTypeBody] = useState("");
+  const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
+
+
+  const handleAccessorySelection = (accessory: string) => {
+    // Verifique se o acessório já está selecionado
+    if (selectedAccessories.includes(accessory)) {
+      // Se estiver selecionado, remova-o da lista de seleção
+      setSelectedAccessories(selectedAccessories.filter((item) => item !== accessory));
+    } else {
+      // Caso contrário, adicione-o à lista de seleção
+      setSelectedAccessories([...selectedAccessories, accessory]);
+    }
+  };
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "cars"), (snapshot) => {
@@ -410,16 +422,14 @@ export function CarsPage() {
               </label>
               <div className="grid grid-cols-2 gap-4 w-full">
                 {accessories.map((accessory) => (
-                  <div
-                    key={accessory.value}
-                    className="flex items-center gap-2"
-                  >
+                  <div key={accessory.value} className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       id={accessory.value}
                       name={accessory.value}
                       value={accessory.value}
-                      onChange={(e) => setSelectedAccessories(e.target.value)}
+                      checked={selectedAccessories.includes(accessory.value)}
+                      onChange={() => handleAccessorySelection(accessory.value)}
                     />
                     <label className="text-[12px] text-white font-bold">
                       {accessory.label}
@@ -428,6 +438,7 @@ export function CarsPage() {
                 ))}
               </div>
             </div>
+
 
             <div className="mt-4">
               <label

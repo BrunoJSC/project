@@ -8,7 +8,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { formatKm } from "../utils/formatPrice";
 
-interface AcessoriesProps {
+interface AccessoriesProps {
   value: string;
   label: string;
 }
@@ -29,22 +29,18 @@ interface CarsProps {
   yearFactory: number;
   yearModification: number;
   images: string[];
-  acessories: AcessoriesProps[];
+  accessory: AccessoriesProps[];
 }
 
 function CardImage({ images, name }: { images: string[]; name: string }) {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const nextSlide = () => {
-    setSlideIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
+    setSlideIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
   };
 
   const prevSlide = () => {
-    setSlideIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
+    setSlideIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
   };
 
   return (
@@ -74,8 +70,11 @@ export function DetailsCar() {
   const [data, setData] = useState<CarsProps[]>([]);
   const location = useLocation();
 
+  const [randomCars, setRandomCars] = useState([]);
+
   const state = location.state as { data: CarsProps };
   const car = state?.data;
+
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "cars"), (snapshot) => {
@@ -99,16 +98,12 @@ export function DetailsCar() {
                 <CardImage images={car.images} name={car.model} />
               </div>
 
-              {/* Coluna para informações do carro */}
               <div className="lg:col-span-2">
                 <div className="bg-white p-4 shadow-md rounded-xl">
                   <h1 className="font-bold text-3xl lg:text-4xl text-[#282828]">
-                    {car.brand}{" "}
-                    <span className="text-[#15803D]">{car.model}</span>
+                    {car.brand} <span className="text-[#15803D]">{car.model}</span>
                   </h1>
-                  <p className="text-lg text-[#282828] font-normal mt-2">
-                    {car.fuel}
-                  </p>
+                  <p className="text-lg text-[#282828] font-normal mt-2">{car.fuel}</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                     <div className="p-4 rounded-lg">
                       <p className="text-[#282828] font-semibold">Cidade</p>
@@ -120,18 +115,14 @@ export function DetailsCar() {
                     </div>
                     <div className="p-4 rounded-lg">
                       <p className="text-[#282828] font-semibold">Ano</p>
-                      <p className="text-green-600 font-bold">
-                        {car.yearFactory}
-                      </p>
+                      <p className="text-green-600 font-bold">{car.yearFactory}</p>
                     </div>
                     <div className="p-4 rounded-lg">
                       <p className="text-[#282828] font-semibold">Câmbio</p>
                       <p className="text-green-600 font-bold">{car.exchange}</p>
                     </div>
                     <div className="p-4 rounded-lg">
-                      <p className="text-[#282828] font-semibold">
-                        Combustivel
-                      </p>
+                      <p className="text-[#282828] font-semibold">Combustivel</p>
                       <p className="text-green-600 font-bold">{car.fuel}</p>
                     </div>
                     <div className="p-4 rounded-lg">
@@ -140,16 +131,20 @@ export function DetailsCar() {
                     </div>
                   </div>
 
-                  <div className="bg-green-500 h-[200px] w-full">
-                    {car?.acessories?.map((acessorie) => (
-                      <p key={acessorie.value}>{acessorie.label}</p>
+                  <div className="bg-green-500 h-[200px] w-full grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 overflow-auto p-5 place-items-center">
+                    {car?.accessory?.map((accessory) => (
+                      <>
+                        <p key={accessory.value} className="bg-white w-[200px] rounded-lg p-2">
+                          {accessory}
+                        </p>
+
+                        {console.log(accessory)}
+                      </>
                     ))}
                   </div>
 
                   <div className=" mt-5 p-4 rounded-lg">
-                    <h2 className="text-xl lg:text-2xl font-bold text-[#282828]">
-                      Sobre o carro
-                    </h2>
+                    <h2 className="text-xl lg:text-2xl font-bold text-[#282828]">Sobre o carro</h2>
                     <p>{car.description}</p>
                   </div>
                 </div>
@@ -217,7 +212,6 @@ export function DetailsCar() {
             </div>
 
             <div className="w-full h-[587px] bg-red-500 mx-auto mt-10">
-              {Math.random() * data.length}
             </div>
           </div>
         </div>
