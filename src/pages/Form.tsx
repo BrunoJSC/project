@@ -164,7 +164,6 @@ export function Form() {
         "LKMoT2R2yHx_zOxUI",
       );
 
-      await addDoc(collection(db, "cars"), data);
       console.log("Document successfully written!");
       reset();
     } catch (error) {
