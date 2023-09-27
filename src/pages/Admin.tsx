@@ -40,7 +40,7 @@ export function Admin() {
   return (
     <div id="admin">
       <Header />
-      <Layout className="min-h-screen bg-car object-contain w-screen h-screen">
+      <Layout className="min-h-screen object-contain w-screen h-screen">
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 ">
           <div className="mx-auto max-w-lg">
             <div className="flex flex-col ">
@@ -65,7 +65,7 @@ export function Admin() {
                   id="email"
                   type="email"
                   {...register("email")}
-                  className="w-full rounded-lg border-green-600 p-4 pe-12 text-sm shadow-sm"
+                  className="w-full rounded-lg border-green-600 p-4 pe-12  bg-gray-200 text-sm shadow-sm"
                   placeholder="Enter email"
                 />
 
@@ -85,7 +85,7 @@ export function Admin() {
                   id="password"
                   type="password"
                   {...register("password")}
-                  className="w-full rounded-lg border-green-600 p-4 pe-12 text-sm shadow-sm"
+                  className="w-full rounded-lg border-green-600 p-4 pe-12 bg-gray-200 text-sm shadow-sm"
                   placeholder="Enter password"
                 />
 

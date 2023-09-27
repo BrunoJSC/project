@@ -19,20 +19,19 @@ export function Banner({ img, title, subtitle, text, show }: FooterProps) {
           <p className="text-white mt-4 sm:text-xl/relaxed">{text}</p>
 
           <div
-            className={`${
-              show ? "block" : "hidden"
-            } mt-8 flex flex-wrap justify-center gap-4`}
+            className={`${show ? "block" : "hidden"
+              } mt-8 flex flex-wrap justify-center gap-4`}
           >
             <a
               className="block w-full rounded bg-green-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-green-700 focus:outline-none focus:ring active:bg-green-500 sm:w-auto"
-              href="#"
+              href="carros"
             >
               Catálogo
             </a>
 
             <a
               className="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-green-600 shadow hover:bg-white/90 focus:outline-none focus:ring active:bg-white/90 sm:w-auto"
-              href="#"
+              href="anunciar"
             >
               Anuncie já
             </a>

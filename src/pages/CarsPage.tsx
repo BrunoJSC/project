@@ -4,7 +4,7 @@ import { db } from "../firebase";
 import { Layout } from "../layout/Layout";
 import { Header } from "../components/Header";
 import { Footer } from "../sections/Footer";
-import { format, formatPrice } from "../utils/formatPrice";
+import { formatPrice } from "../utils/formatPrice";
 import { Link } from "react-router-dom";
 
 const brands = [
@@ -24,6 +24,11 @@ const brands = [
 ];
 
 const yearsFactory = [
+  { value: 1995, label: "1995" },
+  { value: 1996, label: "1996" },
+  { value: 1997, label: "1997" },
+  { value: 1998, label: "1998" },
+  { value: 1999, label: "1999" },
   { value: 2000, label: "2000" },
   { value: 2001, label: "2001" },
   { value: 2002, label: "2002" },
@@ -48,6 +53,7 @@ const yearsFactory = [
   { value: 2021, label: "2021" },
   { value: 2022, label: "2022" },
   { value: 2023, label: "2023" },
+  { value: 2024, label: "2024" },
 ];
 
 const advertisers = [
@@ -205,7 +211,7 @@ export function CarsPage() {
           {/* Menu lateral em desktop */}
           <div
             className={`${isMenuOpen ? "block" : "hidden"
-              } md:block bg-green-700 max-w-[500px] h-[1986px] p-4 transition-transform duration-300 ease-in-out rounded-lg`}
+              } md:block bg-green-700 max-w-[500px] h-[1386px] p-4 transition-transform duration-300 ease-in-out rounded-lg`}
           >
             <h1 className="text-white text-[32px] font-bold mb-4">Filtros</h1>
             <div>
@@ -275,7 +281,7 @@ export function CarsPage() {
                   className="px-[14px] py-[7px] bg-green-200 rounded-md cols-span-2 w-full"
                   onChange={(e) => setSelectedYearFactory(e.target.value)}
                 >
-                  <option value="">Ano inicial</option>
+                  <option value="">Ano</option>
                   {yearsFactory.map((year) => (
                     <option key={year.value} value={year.value}>
                       {year.label}
@@ -303,7 +309,7 @@ export function CarsPage() {
                 className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
                 onChange={(e) => setSelectedCity(e.target.value)}
               >
-                <option value="">Cidade</option>
+                <option value="">Municipio</option>
                 {data.map((car) => (
                   <option key={car.id} value={car.location}>
                     {car.location}
@@ -474,7 +480,7 @@ export function CarsPage() {
                     selectedYearModification) &&
                   (!selectedCity || car.location === selectedCity) &&
                   (filteredPrice === 0 ||
-                    (car.price <= filteredPrice &&
+                    (
                       car.price >= filteredPrice)) &&
                   (!selectedExchange || car.exchange === selectedExchange) &&
                   (!selectedDirection || car.direction === selectedDirection) &&

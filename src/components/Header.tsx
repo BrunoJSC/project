@@ -57,16 +57,16 @@ export function Header() {
                 href="#"
                 className="p-2 text-[#282828] hover:text-green-500 font-bold text-[14px] md:text-base"
               >
-                Loja
+                Lojas
               </a>
             </li>
             <li>
-              <Link
-                to="#"
+              <a
+                href="#"
                 className="p-2 text-[#282828] hover:text-green-500 font-bold text-[14px] md:text-base"
               >
                 Oficina de Dicas
-              </Link>
+              </a>
             </li>
             <li>
               <a

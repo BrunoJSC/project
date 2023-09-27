@@ -15,6 +15,8 @@ import { NotFound } from "./pages/404";
 import { DetailsCar } from "./pages/DetailsCar";
 import { Form } from "./pages/Form";
 import { BikePage } from "./pages/BikePage";
+import { FormCar } from "./components/FormCar";
+import { FormBike } from "./components/FormBike";
 
 export default function App() {
   return (
@@ -72,6 +74,24 @@ export default function App() {
             element={
               <PublicRoute>
                 <Form />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            path="/form/carro"
+            element={
+              <PublicRoute>
+                <FormCar />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            path="/form/moto"
+            element={
+              <PublicRoute>
+                <FormBike />
               </PublicRoute>
             }
           />

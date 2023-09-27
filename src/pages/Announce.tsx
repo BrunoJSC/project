@@ -67,7 +67,7 @@ export function Announce() {
           </div>
 
           <a
-            className="mt-16 block w-full mb-11 md:w-[400px] rounded bg-green-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-green-700 focus:outline-none focus:ring active:bg-green-500"
+            className="mt-16 block w-full flex items-center justify-center mb-11 md:w-[400px] rounded bg-green-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-green-700 focus:outline-none focus:ring active:bg-green-500"
             href="/form"
           >
             Faça seu anúncio com a gente
