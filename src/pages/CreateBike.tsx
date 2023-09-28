@@ -1,12 +1,11 @@
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { ChangeEvent, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import * as z from "zod";
-import { db, storage } from "../firebase";
+import { Link } from "react-router-dom";
 import { Layout } from "../layout/Layout";
 import { ArrowLeft, Image } from "lucide-react";
-import emailjs from "@emailjs/browser";
-import { Link } from "react-router-dom";
+import * as z from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { ChangeEvent, useState } from "react";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { storage } from "../firebase";
 
 interface CreateCarPageProps {
   name: string;
@@ -70,9 +69,9 @@ const schema = z.object({
 
 type FormState = z.infer<typeof schema>;
 
-export function FormBike() {
+export function CreateBike() {
+  const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
   const {
     handleSubmit,
     register,
@@ -80,34 +79,37 @@ export function FormBike() {
     formState: { errors },
   } = useForm<FormState>({});
 
+  const downloadURLs: string[] = [];
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      setSelectedFiles(files);
+    }
+  };
+
+  const handleUpload = async () => {
+    if (selectedFiles) {
+      for (const element of Array.from(selectedFiles)) {
+        const file = element;
+        const storageRef = ref(storage, `images/${file.name}`);
+        await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(storageRef);
+        downloadURLs.push(downloadURL);
+        console.log("Image uploaded successfully:", downloadURL);
+      }
+    }
+    return downloadURLs;
+  };
+
   const handleFormSubmit: SubmitHandler<CreateCarPageProps> = async (data) => {
     setLoading(true);
     try {
-      const templateParams = {
-        to_name: data.name,
-        message: `
-        <html>
-          <body>
-            <p>Informações da moto:</p>
-            <ul>
-              <li>Nome: ${data.name}</li>
-              <li>Email: ${data.email}</li>
-              <li>Modelo: ${data.model}</li>
-              <!-- Outros campos do formulário aqui -->
-            </ul>
-            <p>Imagem do carro:</p>
-            <img src='${data.images[0]}' alt="Imagem do Carro">
-          </body>
-        </html>
-      `,
-      };
-
-      await emailjs.send(
-        "service_x5am4vw",
-        "template_vnqp85r",
-        templateParams,
-        "LKMoT2R2yHx_zOxUI",
-      );
+      console.log("Loading");
+      if (selectedFiles) {
+        const downloadURLs = await handleUpload();
+        data.images = downloadURLs;
+      }
 
       console.log("Document successfully written!");
       reset();
@@ -119,7 +121,7 @@ export function FormBike() {
   };
 
   return (
-    <>
+    <div>
       <Layout className="p-2">
         <Link
           to="/dashboard"
@@ -127,6 +129,7 @@ export function FormBike() {
         >
           <ArrowLeft className="h-12 w-12 text-green-500" />
         </Link>
+
         <form
           action="https://formsubmit.co/db@autonegocie.com.br"
           method="POST"
@@ -420,6 +423,7 @@ export function FormBike() {
                 <input
                   id="file-upload"
                   {...register("images")}
+                  onChange={handleFileChange}
                   accept="image/*"
                   multiple
                   type="file"
@@ -450,6 +454,6 @@ export function FormBike() {
           </button>
         </form>
       </Layout>
-    </>
+    </div>
   );
 }

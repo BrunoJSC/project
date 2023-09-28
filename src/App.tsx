@@ -17,6 +17,7 @@ import { Form } from "./pages/Form";
 import { BikePage } from "./pages/BikePage";
 import { FormCar } from "./components/FormCar";
 import { FormBike } from "./components/FormBike";
+import { CreateBike } from "./pages/CreateBike";
 
 export default function App() {
   return (
@@ -138,6 +139,16 @@ export default function App() {
             element={
               <PrivateRoute>
                 <CreateCar />
+              </PrivateRoute>
+            }
+          />
+
+
+          <Route
+            path="/criar-moto"
+            element={
+              <PrivateRoute>
+                <CreateBike />
               </PrivateRoute>
             }
           />

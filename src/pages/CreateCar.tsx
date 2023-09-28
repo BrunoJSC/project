@@ -148,159 +148,136 @@ export function CreateCar() {
         >
           <ArrowLeft className="h-12 w-12 text-green-500" />
         </Link>
+
         <form
-          className="max-w-lg mx-auto mt-5 mb-24"
+          className="max-w-lg mx-auto mt-5 mb-24 "
           onSubmit={handleSubmit(handleFormSubmit)}
         >
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Envie as informações do seu carro/moto para o anuncio!
+              Envie as informações do seu carro para o anuncio!
             </h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
-              Informe os dados da carro!*
+              Informe os dados do carro!*
             </p>
 
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-6">
+            <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {/* Nome */}
+              <div>
                 <label
                   htmlFor="name"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Nome
                 </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <input
-                      type="text"
-                      id="name"
-                      {...register("name")}
-                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                      placeholder="Ex: pedro"
-                    />
-                  </div>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    id="name"
+                    {...register("name")}
+                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    placeholder="Ex: pedro"
+                  />
                 </div>
               </div>
-            </div>
 
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-6">
+              {/* Parcelas */}
+              <div>
                 <label
-                  htmlFor="name"
+                  htmlFor="parcials"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Parcelas
                 </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <input
-                      type="text"
-                      id="name"
-                      {...register("parcials")}
-                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                      placeholder="Ex: 12x 80.000"
-                    />
-                  </div>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    id="parcials"
+                    {...register("parcials")}
+                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    placeholder="Ex: 12x 80.000"
+                  />
                 </div>
               </div>
             </div>
 
-            <div className="sm:col-span-6 mt-6">
+            <div className="mt-6">
+              {/* Municipio */}
               <label
                 htmlFor="localizacao"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Localização
+                Municipio
               </label>
-              <div className="mt-2">
-                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <select
-                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                    {...register("location")}
-                  >
-                    <option value="">Selecione um estado</option>
-                    <option value="AC">Acre</option>
-                    <option value="AL">Alagoas</option>
-                    <option value="AP">Amapá</option>
-                    <option value="AM">Amazonas</option>
-                    <option value="BA">Bahia</option>
-                    <option value="CE">Ceará</option>
-                    <option value="DF">Distrito Federal</option>
-                    <option value="ES">Espírito Santo</option>
-                    <option value="GO">Goiás</option>
-                    <option value="MA">Maranhão</option>
-                    <option value="MT">Mato Grosso</option>
-                    <option value="MS">Mato Grosso do Sul</option>
-                    <option value="MG">Minas Gerais</option>
-                    <option value="PA">Pará</option>
-                    <option value="PB">Paraíba</option>
-                    <option value="PR">Paraná</option>
-                    <option value="PE">Pernambuco</option>
-                    <option value="PI">Piauí</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                    <option value="RN">Rio Grande do Norte</option>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="RO">Rondônia</option>
-                    <option value="RR">Roraima</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="SE">Sergipe</option>
-                    <option value="TO">Tocantins</option>
-                  </select>
-                </div>
+              <div className="mt-1">
+                <select
+                  className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                  {...register("location")}
+                >
+                  <option value="">Selecione um estado</option>
+                  <option value="">Selecione um município</option>
+                  <option value="SaoPaulo">São Paulo</option>
+                  <option value="Guarulhos">Guarulhos</option>
+                  <option value="Campinas">Campinas</option>
+                  <option value="SaoBernardo">São Bernardo do Campo</option>
+                  <option value="SantoAndre">Santo André</option>
+                  <option value="Osasco">Osasco</option>
+                </select>
               </div>
             </div>
 
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-3">
+            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {/* Marca */}
+              <div>
                 <label
                   htmlFor="brand"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Marca
                 </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <input
-                      type="text"
-                      id="brand"
-                      {...register("brand")}
-                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                      placeholder="Ex: Volkswagen"
-                    />
-                  </div>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    id="brand"
+                    {...register("brand")}
+                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    placeholder="Ex: Volkswagen"
+                  />
                 </div>
               </div>
 
-              <div className="sm:col-span-3">
+              {/* Modelo */}
+              <div>
                 <label
                   htmlFor="model"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Modelo
                 </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <input
-                      type="text"
-                      {...register("model")}
-                      id="model"
-                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                      placeholder="Ex: Gol"
-                    />
-                  </div>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    id="model"
+                    {...register("model")}
+                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    placeholder="Ex: Gol"
+                  />
                 </div>
               </div>
             </div>
 
-            <div className="sm:col-span-6 mt-6 w-full">
-              <label
-                htmlFor="bodyType"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Tipo de carroceria
-              </label>
-              <div className="mt-2 w-full">
-                <div className="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+            {/* Outros campos de entrada aqui */}
+
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
+              {/* Tipo de Carroceria */}
+              <div>
+                <label
+                  htmlFor="bodyType"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Tipo de carroceria
+                </label>
+                <div className="mt-1">
                   <select
                     id="bodyType"
                     {...register("typeBody")}
@@ -315,63 +292,60 @@ export function CreateCar() {
                   </select>
                 </div>
               </div>
-            </div>
 
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-6">
+              {/* KM */}
+              <div>
                 <label
-                  htmlFor="color"
+                  htmlFor="km"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   KM
                 </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <input
-                      type="text"
-                      id="km"
-                      {...register("km")}
-                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                      placeholder="Ex: 18.000"
-                    />
-                  </div>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    id="km"
+                    {...register("km")}
+                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    placeholder="Ex: 18.000"
+                  />
                 </div>
               </div>
             </div>
 
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-6">
+            {/* Outros campos de entrada aqui */}
+
+            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {/* Mecanico */}
+              <div>
                 <label
                   htmlFor="mechanic"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Mecanico
                 </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <select
-                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                      id="mechanic"
-                      {...register("mechanic")}
-                    >
-                      <option>Ótimo</option>
-                      <option>Bom</option>
-                      <option>Ruim</option>
-                    </select>
-                  </div>
+                <div className="mt-1">
+                  <select
+                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    id="mechanic"
+                    {...register("mechanic")}
+                  >
+                    <option>Ótimo</option>
+                    <option>Bom</option>
+                    <option>Ruim</option>
+                  </select>
                 </div>
               </div>
-            </div>
 
-            <div className="sm:col-span-6 mt-6">
-              <label
-                htmlFor="auction"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Leilão
-              </label>
-              <div className="mt-2">
-                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+              {/* Leilão */}
+              <div>
+                <label
+                  htmlFor="auction"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Leilão
+                </label>
+                <div className="mt-1">
                   <select
                     className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
                     {...register("auction")}
@@ -383,110 +357,115 @@ export function CreateCar() {
               </div>
             </div>
 
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-3">
+            {/* Outros campos de entrada aqui */}
+
+            <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {/* Ano de fabricação */}
+              <div>
                 <label
-                  htmlFor="factory"
+                  htmlFor="yearFactory"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Ano de fabricação
                 </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <input
-                      type="text"
-                      id="yearFactory"
-                      {...register("yearFactory")}
-                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                      placeholder="Ex: 2022"
-                    />
-                  </div>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    id="yearFactory"
+                    {...register("yearFactory")}
+                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    placeholder="Ex: 2022"
+                  />
                 </div>
               </div>
 
-              <div className="sm:col-span-3">
+              {/* Ano de modificação */}
+              <div>
                 <label
-                  htmlFor="modification"
+                  htmlFor="yearModification"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Ano de modificação <span className="text-xs">(opcional)</span>
                 </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <input
-                      type="text"
-                      id="yearModification"
-                      {...register("yearModification")}
-                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                      placeholder="Ex: 2025"
-                    />
-                  </div>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    id="yearModification"
+                    {...register("yearModification")}
+                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    placeholder="Ex: 2025"
+                  />
                 </div>
               </div>
             </div>
 
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-3">
+            {/* Outros campos de entrada aqui */}
+
+            <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {/* Cor */}
+              <div>
                 <label
                   htmlFor="color"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Cor
                 </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <input
-                      type="text"
-                      id="color"
-                      {...register("color")}
-                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                      placeholder="Ex: Azul"
-                    />
-                  </div>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    id="color"
+                    {...register("color")}
+                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    placeholder="Ex: Azul"
+                  />
                 </div>
               </div>
 
-              <div className="sm:col-span-3">
+              {/* Portas */}
+              <div>
                 <label
                   htmlFor="doors"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Portas
                 </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <select
-                      className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                      {...register("doors")}
-                    >
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                    </select>
-                  </div>
+                <div className="mt-1">
+                  <select
+                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                    {...register("doors")}
+                  >
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                  </select>
                 </div>
               </div>
             </div>
 
-            <div className="col-span-6 mt-5">
+            {/* Outros campos de entrada aqui */}
+
+            {/* Selecione o cambio */}
+            <div className="col-span-full mt-5">
               <label className="block text-sm font-medium leading-6 text-gray-900">
                 Selecione o cambio
               </label>
-              <div className="mt-2">
+              <div className="mt-1">
                 <select
                   className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
                   {...register("exchange", { required: true })}
                 >
-
                   <option>Selecione o tipo de cambio</option>
                   <option value="Manual">Manual</option>
-                  <option value="eletrica">Eletrica</option>
-                  <option value="hidraulica">Hidraulica</option>
+                  <option value="Eletrica">Eletrica</option>
+                  <option value="Hidraulica">Hidraulica</option>
                 </select>
               </div>
             </div>
 
-            <div className="sm:col-span-6 mt-6 w-full">
+            {/* Outros campos de entrada aqui */}
+
+            {/* Acessórios do Carro */}
+            <div className="col-span-full mt-6 w-full">
               <label
                 htmlFor="accessories"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -513,7 +492,8 @@ export function CreateCar() {
               </div>
             </div>
 
-            <div className="sm:col-span-6 mt-6 w-full">
+            {/* Preço do Carro */}
+            <div className="col-span-full mt-6 w-full">
               <label
                 htmlFor="price"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -521,19 +501,18 @@ export function CreateCar() {
                 Preço do Carro
               </label>
               <div className="mt-2 w-full">
-                <div className="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <input
-                    type="text"
-                    id="price"
-                    {...register("price")}
-                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                    placeholder="Ex: R$ 100.000"
-                  />
-                </div>
+                <input
+                  type="text"
+                  id="price"
+                  {...register("price")}
+                  className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                  placeholder="Ex: R$ 100.000"
+                />
               </div>
             </div>
 
-            <div className="sm:col-span-6 mt-6 w-full">
+            {/* Combustível */}
+            <div className="col-span-full mt-6 w-full">
               <label
                 htmlFor="fuel"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -541,25 +520,24 @@ export function CreateCar() {
                 Combustível
               </label>
               <div className="mt-2 w-full">
-                <div className="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <select
-                    id="fuel"
-                    {...register("fuel")}
-                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                  >
-                    <option value="">Selecione um tipo de combustível</option>
-                    <option value="flex">Flex</option>
-                    <option value="Gasolina">Gasolina</option>
-                    <option value="Diesel">Diesel</option>
-                    <option value="Etanol">Etanol</option>
-                    <option value="GNV">GNV</option>
-                    <option value="eletrico">Eletrico</option>
-                  </select>
-                </div>
+                <select
+                  id="fuel"
+                  {...register("fuel")}
+                  className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                >
+                  <option value="">Selecione um tipo de combustível</option>
+                  <option value="Flex">Flex</option>
+                  <option value="Gasolina">Gasolina</option>
+                  <option value="Diesel">Diesel</option>
+                  <option value="Etanol">Etanol</option>
+                  <option value="GNV">GNV</option>
+                  <option value="Elétrico">Elétrico</option>
+                </select>
               </div>
             </div>
 
-            <div className="sm:col-span-6 mt-6 w-full">
+            {/* Descrição */}
+            <div className="col-span-full mt-6 w-full">
               <label
                 htmlFor="description"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -567,20 +545,19 @@ export function CreateCar() {
                 Descrição
               </label>
               <div className="mt-2 w-full">
-                <div className="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                  <textarea
-                    id="description"
-                    className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
-                    placeholder="Ex: Carro muito bom!"
-                    rows={4}
-                    cols={50}
-                    {...register("description")}
-                  />
-                </div>
+                <textarea
+                  id="description"
+                  className="block w-full py-1.5 px-2 text-black placeholder-text-white focus:ring-0 sm:text-sm sm:leading-6 bg-green-200"
+                  placeholder="Ex: Carro muito bom!"
+                  rows={4}
+                  cols={50}
+                  {...register("description")}
+                />
               </div>
             </div>
           </div>
 
+          {/* Upload de Fotos */}
           <div className="col-span-full">
             <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
               <div className="text-center">
@@ -613,12 +590,15 @@ export function CreateCar() {
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="mt-10 w-full rounded bg-green-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-green-700 focus:outline-none focus:ring active:bg-green-500 sm:w-auto"
-          >
-            Adicionar
-          </button>
+          {/* Botão de Envio */}
+          <div className="col-span-full mt-6">
+            <button
+              type="submit"
+              className="mt-10 w-full rounded bg-green-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-green-700 focus:outline-none focus:ring active:bg-green-500 sm:w-auto"
+            >
+              Adicionar
+            </button>
+          </div>
         </form>
       </Layout>
     </div>

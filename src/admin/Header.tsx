@@ -8,8 +8,8 @@ import { auth } from "../firebase";
 
 const pages = [
   { name: "Carros", href: "/criar-carro", icon: CarIcon },
-  { name: "Motos", href: "/create-bikes", icon: BikeIcon },
-  { name: "Repasse", href: "/create-transfer", icon: Move3dIcon },
+  { name: "Motos", href: "/criar-moto", icon: BikeIcon },
+
 ];
 
 export function Header() {
@@ -133,9 +133,8 @@ export function Header() {
                       <Disclosure.Button className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium leading-6 text-white rounded-md hover:bg-green-500 focus:outline-none focus-visible:ring focus-visible:ring-green-900 focus-visible:ring-opacity-75">
                         <span>Veículos</span>
                         <ChevronDownIcon
-                          className={`${
-                            open ? "transform rotate-180" : ""
-                          } w-5 h-5 text-white`}
+                          className={`${open ? "transform rotate-180" : ""
+                            } w-5 h-5 text-white`}
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className="px-3 pt-2 pb-4 space-y-1">

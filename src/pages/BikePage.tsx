@@ -124,14 +124,6 @@ const fuel = [
   { value: "Hibrido", label: "Hibrido" },
 ];
 
-const body = [
-  { value: "seda", label: "Sedan" },
-  { value: "hatchback", label: "Hatchback" },
-  { value: "utilitario", label: "Utilitario" },
-  { value: "suv", label: "SUV" },
-  { value: "van", label: "Van" },
-];
-
 interface BikeProps {
   id: string;
   model: string;
@@ -160,9 +152,7 @@ export function BikePage() {
   const [selectedCity, setSelectedCity] = useState("");
   const [filteredPrice, setFilteredPrice] = useState<number>(0);
 
-
   const [selectedFuel, setSelectedFuel] = useState("");
-
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "bikes"), (snapshot) => {
@@ -195,8 +185,9 @@ export function BikePage() {
           </div>
           {/* Menu lateral em desktop */}
           <div
-            className={`${isMenuOpen ? "block" : "hidden"
-              } md:block bg-green-700 max-w-[500px] h-[686px] p-4 transition-transform duration-300 ease-in-out rounded-lg`}
+            className={`${
+              isMenuOpen ? "block" : "hidden"
+            } md:block bg-green-700 max-w-[500px] h-[686px] p-4 transition-transform duration-300 ease-in-out rounded-lg`}
           >
             <h1 className="text-white text-[32px] font-bold mb-4">Filtros</h1>
             <div>
@@ -212,26 +203,6 @@ export function BikePage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-            </div>
-
-            <div className="mt-4">
-              <label
-                htmlFor="typeFuel"
-                className="block mb-2 text-white text-[16px]"
-              ></label>
-              <select
-                id="typeBody"
-                value={selectedFuel}
-                className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
-                onChange={(e) => setSelectedFuel(e.target.value)}
-              >
-                <option value="">Tipo</option>
-                {body.map((bike) => (
-                  <option key={bike.value} value={bike.value}>
-                    {bike.label}
-                  </option>
-                ))}
-              </select>
             </div>
 
             <div className="mt-4">
@@ -375,12 +346,12 @@ export function BikePage() {
                     String(bike.yearFactory) === selectedYearFactory) &&
                   (!selectedYearModification ||
                     String(bike.yearModification) ===
-                    selectedYearModification) &&
+                      selectedYearModification) &&
                   (!selectedCity || bike.location === selectedCity) &&
                   (filteredPrice === 0 ||
-                    (bike.price >= filteredPrice) &&
-                    (!selectedFuel || bike.fuel === selectedFuel)
-                  ))
+                    (bike.price >= filteredPrice &&
+                      (!selectedFuel || bike.fuel === selectedFuel))),
+              )
 
               .map((bike) => (
                 <Link

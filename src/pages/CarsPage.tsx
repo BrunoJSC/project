@@ -167,12 +167,10 @@ export function CarsPage() {
   const [selectedTypeBody, setSelectedTypeBody] = useState("");
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
 
-
   const handleAccessorySelection = (accessory: string) => {
     // Verifique se o acessório já está selecionado
     if (selectedAccessories.includes(accessory)) {
       // Se estiver selecionado, remova-o da lista de seleção
-      setSelectedAccessories(selectedAccessories.filter((item) => item !== accessory));
     } else {
       // Caso contrário, adicione-o à lista de seleção
       setSelectedAccessories([...selectedAccessories, accessory]);
@@ -210,8 +208,9 @@ export function CarsPage() {
           </div>
           {/* Menu lateral em desktop */}
           <div
-            className={`${isMenuOpen ? "block" : "hidden"
-              } md:block bg-green-700 max-w-[500px] h-[1386px] p-4 transition-transform duration-300 ease-in-out rounded-lg`}
+            className={`${
+              isMenuOpen ? "block" : "hidden"
+            } md:block bg-green-700 max-w-[500px] h-[1386px] p-4 transition-transform duration-300 ease-in-out rounded-lg`}
           >
             <h1 className="text-white text-[32px] font-bold mb-4">Filtros</h1>
             <div>
@@ -428,7 +427,10 @@ export function CarsPage() {
               </label>
               <div className="grid grid-cols-2 gap-4 w-full">
                 {accessories.map((accessory) => (
-                  <div key={accessory.value} className="flex items-center gap-2">
+                  <div
+                    key={accessory.value}
+                    className="flex items-center gap-2"
+                  >
                     <input
                       type="checkbox"
                       id={accessory.value}
@@ -444,7 +446,6 @@ export function CarsPage() {
                 ))}
               </div>
             </div>
-
 
             <div className="mt-4">
               <label
@@ -477,16 +478,14 @@ export function CarsPage() {
                     String(car.yearFactory) === selectedYearFactory) &&
                   (!selectedYearModification ||
                     String(car.yearModification) ===
-                    selectedYearModification) &&
+                      selectedYearModification) &&
                   (!selectedCity || car.location === selectedCity) &&
-                  (filteredPrice === 0 ||
-                    (
-                      car.price >= filteredPrice)) &&
+                  (filteredPrice === 0 || car.price >= filteredPrice) &&
                   (!selectedExchange || car.exchange === selectedExchange) &&
                   (!selectedDirection || car.direction === selectedDirection) &&
                   (!selectedFuel || car.fuel === selectedFuel) &&
                   (!selectedDoors ||
-                    Number(car.doors) === Number(selectedDoors))
+                    Number(car.doors) === Number(selectedDoors)),
               )
               .map((car) => (
                 <Link
