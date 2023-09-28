@@ -118,18 +118,9 @@ const advertisers = [
   { value: "Repasse", label: "Repasse" },
 ];
 
-const direction = [
-  { value: "Manual", label: "manual" },
-  { value: "Eletrica", label: "eletrica" },
-  { value: "Hidraulica", label: "hidraulica" },
-];
-
 const fuel = [
   { value: "Gasolina", label: "Gasolina" },
-  { value: "Alcool", label: "Alcool" },
-  { value: "Diesel", label: "Diesel" },
-  { value: "Flex", label: "Flex" },
-  { value: "GNV", label: "GVN" },
+
   { value: "Hibrido", label: "Hibrido" },
 ];
 
@@ -141,16 +132,13 @@ const body = [
   { value: "van", label: "Van" },
 ];
 
-interface CarsProps {
+interface BikeProps {
   id: string;
   model: string;
   brand: string;
   price: number;
   km: number;
-  doors: number;
   color: string;
-  exchange: string;
-  direction: string;
   typeBody: string;
   fuel: string;
   location: string;
@@ -160,9 +148,9 @@ interface CarsProps {
 }
 
 export function BikePage() {
-  const [data, setData] = useState<CarsProps[]>([]);
+  const [data, setData] = useState<BikeProps[]>([]);
   const [search, setSearch] = useState<string>("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedYearFactory, setSelectedYearFactory] = useState("");
@@ -171,17 +159,17 @@ export function BikePage() {
   const [selectedKmEnd, setSelectedKmEnd] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
   const [filteredPrice, setFilteredPrice] = useState<number>(0);
-  const [selectedExchange, setSelectedExchange] = useState("");
-  const [selectedDirection, setSelectedDirection] = useState("");
+
+
   const [selectedFuel, setSelectedFuel] = useState("");
-  const [selectedTypeBody, setSelectedTypeBody] = useState("");
+
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "bikes"), (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-      })) as CarsProps[];
+      })) as BikeProps[];
       setData(data);
     });
 
@@ -208,7 +196,7 @@ export function BikePage() {
           {/* Menu lateral em desktop */}
           <div
             className={`${isMenuOpen ? "block" : "hidden"
-              } md:block bg-green-700 max-w-[500px] h-[1986px] p-4 transition-transform duration-300 ease-in-out rounded-lg`}
+              } md:block bg-green-700 max-w-[500px] h-[686px] p-4 transition-transform duration-300 ease-in-out rounded-lg`}
           >
             <h1 className="text-white text-[32px] font-bold mb-4">Filtros</h1>
             <div>
@@ -352,53 +340,30 @@ export function BikePage() {
                 </select>
               </div>
             </div>
-            <div className="mt-4 grid grid-cols-2 gap-4">
-
-            </div>
+            <div className="mt-4 grid grid-cols-2 gap-4"></div>
 
             <div>
-              <label
-                htmlFor="direction"
-                className="block text-white text-[16px] mb-2"
-              ></label>
-              <select
-                id="direction"
-                value={selectedDirection}
-                className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
-                onChange={(e) => setSelectedDirection(e.target.value)}
-              >
-                <option value="">Direção</option>
-                {direction.map((direction) => (
-                  <option key={direction.value} value={direction.value}>
-                    {direction.label}
-                  </option>
-                ))}
-              </select>
+              <div className="mt-4">
+                <label
+                  htmlFor="fuel"
+                  className="text-white text-[16px] mb-2"
+                ></label>
+                <select
+                  id="fuel"
+                  value={selectedBrand}
+                  className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
+                  onChange={(e) => setSelectedBrand(e.target.value)}
+                >
+                  <option value="">Combustível</option>
+                  {fuel.map((fuel) => (
+                    <option key={fuel.value} value={fuel.value}>
+                      {fuel.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
-
-          <div>
-            <div className="mt-4">
-              <label
-                htmlFor="fuel"
-                className="text-white text-[16px] mb-2"
-              ></label>
-              <select
-                id="fuel"
-                value={selectedBrand}
-                className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
-                onChange={(e) => setSelectedBrand(e.target.value)}
-              >
-                <option value="">Combustível</option>
-                {fuel.map((fuel) => (
-                  <option key={fuel.value} value={fuel.value}>
-                    {fuel.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
 
           <div className="md:col-span-1 grid grid-cols-1 md:grid-cols-1 gap-2 w-full overflow-auto">
             {data
@@ -413,20 +378,20 @@ export function BikePage() {
                     selectedYearModification) &&
                   (!selectedCity || bike.location === selectedCity) &&
                   (filteredPrice === 0 ||
-                    (bike.price <= filteredPrice &&
-                      bike.price >= filteredPrice)) &&
-                  (!selectedFuel || bike.fuel === selectedFuel))
+                    (bike.price >= filteredPrice) &&
+                    (!selectedFuel || bike.fuel === selectedFuel)
+                  ))
 
-              .map((car) => (
+              .map((bike) => (
                 <Link
-                  to={`/carros/detalhes/${car.id}`}
-                  state={{ data: car }}
-                  key={car.id}
+                  to={`/motos/detalhes/${bike.id}`}
+                  state={{ data: bike }}
+                  key={bike.id}
                   className="flex flex-col md:flex-row bg-white mb-4"
                 >
                   <div className="h-[223px] md:w-[304px] md:rounded-l-lg">
                     <img
-                      src={car.images[0]}
+                      src={bike.images[0]}
                       alt=""
                       className="h-full w-full object-cover md:rounded-l-lg"
                     />
@@ -435,37 +400,36 @@ export function BikePage() {
                   <div className="bg-[#F2F2F2] flex flex-col justify-between p-2 w-full rounded-r-lg md:rounded-l-none md:rounded-r-lg md:flex-grow">
                     <div>
                       <h1 className="font-bold text-[20px] md:text-[36px] text-[#15803D]">
-                        {car.brand} {car.model}
+                        {bike.brand} {bike.model}
                       </h1>
                       <p className="text-[12px] md:text-[14px] font-medium">
                         <span className="font-bold">Cidade:</span>{" "}
-                        {car.location}
+                        {bike.location}
                       </p>
                       <p className="text-[12px] md:text-[14px] font-medium">
                         <span className="font-bold">Ano:</span>{" "}
-                        {car.yearFactory}
+                        {bike.yearFactory}
                       </p>
                       <p className="text-[12px] md:text-[14px] font-medium">
-                        <span className="font-bold">KM:</span> {car.km}
+                        <span className="font-bold">KM:</span> {bike.km}
                       </p>
                       <p className="text-[12px] md:text-[14px] font-medium">
                         <span className="font-bold">Combustível:</span>{" "}
-                        {car.fuel}
+                        {bike.fuel}
                       </p>
                     </div>
                     <div>
                       <p className="font-bold text-[12px] md:text-[14px] text-[#1E1E1E]">
-                        Valor: {formatPrice(car.price)}
+                        Valor: {formatPrice(bike.price)}
                       </p>
                     </div>
-
                   </div>
                 </Link>
               ))}
           </div>
         </div>
-      </Layout >
+      </Layout>
       <Footer show={true} mt={6} smMt={32} />
-    </div >
+    </div>
   );
 }

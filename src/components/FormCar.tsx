@@ -183,10 +183,10 @@ export function FormCar() {
         >
           <div className="space-y-6 sm:space-y-8">
             <div className="border-b border-gray-900/10 pb-6 sm:pb-10">
-              <h2 className="text-[32px] font-bold text-[#1E1E1E] leading-10">
-                Envie as informações do seu{" "}
-                <span className="text-green-500">carro</span>/
-                <span className="text-green-500">moto</span> para o anúncio!
+              <h2 className="text-[32px] font-bold text-[#1e1e1e] leading-10">
+                envie as informações do seu{" "}
+                <span className="text-green-500">carro</span>{" "}
+                para o anúncio!
               </h2>
               <p className="mt-1 text-sm leading-6 text-gray-600">
                 Informe os dados do carro!*
