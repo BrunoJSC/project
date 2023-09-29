@@ -215,13 +215,20 @@ export function CreateCar() {
                   {...register("location")}
                 >
                   <option value="">Selecione um estado</option>
-                  <option value="">Selecione um município</option>
-                  <option value="SaoPaulo">São Paulo</option>
+                  <option value="São Paulo">São Paulo</option>
                   <option value="Guarulhos">Guarulhos</option>
                   <option value="Campinas">Campinas</option>
-                  <option value="SaoBernardo">São Bernardo do Campo</option>
-                  <option value="SantoAndre">Santo André</option>
+                  <option value="São Bernardo do Campo">
+                    São Bernardo do Campo
+                  </option>
+                  <option value="São José dos Campos">
+                    São José dos Campos
+                  </option>
+                  <option value="Santo André">Santo André</option>
+                  <option value="Ribeirão Preto">Ribeirão Preto</option>
                   <option value="Osasco">Osasco</option>
+                  <option value="Sorocaba">Sorocaba</option>
+                  <option value="Mauá">Mauá</option>
                 </select>
               </div>
             </div>

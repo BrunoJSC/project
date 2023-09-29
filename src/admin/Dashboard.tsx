@@ -16,18 +16,21 @@ import { Layout } from "../layout/Layout";
 
 interface Car {
   id: string;
-  brand: string;
   model: string;
-  yearFactor: number;
-  yearModification: number;
+  brand: string;
   price: number;
-  location: string;
-  door: string;
-  type: string;
+  km: number;
+  doors: number;
   color: string;
-  images: string[];
+  exchange: string;
+  typeBody: string;
+  fuel: string;
+  location: string;
+  yearFactory: number;
+  yearModification: number;
+  parcials: string;
   description: string;
-  // options: OptionsProps[];
+  images: string[];
 }
 
 interface Bike {
@@ -38,7 +41,7 @@ interface Bike {
   price: number;
   color: string;
   location: string;
-  images: string[];
+  typeBody: string;
   description: string;
 }
 
@@ -91,14 +94,19 @@ export function Dashboard() {
     if (editingCarId) {
       const carRef = doc(db, "cars", editingCarId.id);
       await updateDoc(carRef, {
-        brand: editingCarId.brand,
         model: editingCarId.model,
-        year: editingCarId.yearFactor,
-        yearModification: editingCarId.yearModification,
+        brand: editingCarId.brand,
         price: editingCarId.price,
+        km: editingCarId.km,
+        doors: editingCarId.doors,
         color: editingCarId.color,
-        description: editingCarId.description,
-        // options: editingCarId.options,
+        exchange: editingCarId.exchange,
+        typeBody: editingCarId.typeBody,
+        fuel: editingCarId.fuel,
+        location: editingCarId.location,
+        yearFactory: editingCarId.yearFactory,
+        yearModification: editingCarId.yearModification,
+        parcials: editingCarId.parcials,
       })
         .then(() => {
           console.log("Document successfully updated!");
@@ -263,11 +271,11 @@ export function Dashboard() {
                   type="number"
                   id="year"
                   name="year"
-                  value={editingCarId.yearFactor}
+                  value={editingCarId.yearFactory}
                   onChange={(e) =>
                     setEditingCarId({
                       ...editingCarId,
-                      yearFactor: Number(e.target.value),
+                      yearFactory: Number(e.target.value),
                     })
                   }
                 />
@@ -315,11 +323,11 @@ export function Dashboard() {
                   type="text"
                   id="type"
                   name="type"
-                  value={editingCarId.type}
+                  value={editingCarId.typeBody}
                   onChange={(e) =>
                     setEditingCarId({
                       ...editingCarId,
-                      type: e.target.value,
+                      typeBody: e.target.value,
                     })
                   }
                 />
@@ -329,11 +337,50 @@ export function Dashboard() {
                   type="text"
                   id="doors"
                   name="doors"
-                  value={editingCarId.door}
+                  value={editingCarId.doors}
                   onChange={(e) =>
                     setEditingCarId({
                       ...editingCarId,
-                      door: e.target.value,
+                      doors: Number(e.target.value),
+                    })
+                  }
+                />
+
+                <label htmlFor="exechange">Cambio</label>
+                <input
+                  type="text"
+                  id="exechange"
+                  name="exechange"
+                  value={editingCarId.exchange}
+                  onChange={(e) =>
+                    setEditingCarId({
+                      ...editingCarId,
+                      exchange: e.target.value,
+                    })
+                  }
+                />
+
+                <label htmlFor="fuel">Combustível</label>
+                <input
+                  type="text"
+                  id="fuel"
+                  name="fuel"
+                  value={editingCarId.fuel}
+                  onChange={(e) =>
+                    setEditingCarId({ ...editingCarId, fuel: e.target.value })
+                  }
+                />
+
+                <label htmlFor="partials">Paticials</label>
+                <input
+                  type="text"
+                  id="partials"
+                  name="partials"
+                  value={editingCarId.parcials}
+                  onChange={(e) =>
+                    setEditingCarId({
+                      ...editingCarId,
+                      parcials: e.target.value,
                     })
                   }
                 />

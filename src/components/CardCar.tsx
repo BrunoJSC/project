@@ -25,7 +25,7 @@ export function CardCar({
       key={id}
       className="overflow-hidden rounded-lg shadow transition hover:shadow-lg"
     >
-      <img src={images[0]} alt={name} className="h-56 w-full object-cover" />
+      <img src={images?.[0]} alt={name} className="h-56 w-full object-cover" />
 
       <div className="bg-white p-4 sm:p-6">
         <h3 className="text-xl font-semibold text-gray-900">{name}</h3>

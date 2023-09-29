@@ -23,6 +23,19 @@ const brands = [
   { value: "Volvo", label: "Volvo" },
 ];
 
+const location = [
+  { value: "São Paulo", label: "São Paulo" },
+  { value: "Guarulhos", label: "Guarulhos" },
+  { value: "Campinas", label: "Campinas" },
+  { value: "São Bernardo do Campo", label: "São Bernardo do Campo" },
+  { value: "São José dos Campos", label: "São José dos Campos" },
+  { value: "Santo André", label: "Santo André" },
+  { value: "Ribeirão Preto", label: "Ribeirão Preto" },
+  { value: "Osasco", label: "Osasco" },
+  { value: "Sorocaba", label: "Sorocaba" },
+  { value: "Mauá", label: "Mauá" },
+];
+
 const yearsFactory = [
   { value: 1995, label: "1995" },
   { value: 1996, label: "1996" },
@@ -147,6 +160,7 @@ interface CarsProps {
   yearFactory: number;
   yearModification: number;
   parcials: string;
+  accessories: string[];
   images: string[];
 }
 
@@ -166,16 +180,23 @@ export function CarsPage() {
   const [selectedDoors, setSelectedDoors] = useState("");
   const [selectedTypeBody, setSelectedTypeBody] = useState("");
   const [selectedAccessories, setSelectedAccessories] = useState<string[]>([]);
+  const [car, setCar] = useState<CarsProps>();
 
   const handleAccessorySelection = (accessory: string) => {
-    // Verifique se o acessório já está selecionado
-    if (selectedAccessories.includes(accessory)) {
-      // Se estiver selecionado, remova-o da lista de seleção
-    } else {
-      // Caso contrário, adicione-o à lista de seleção
-      setSelectedAccessories([...selectedAccessories, accessory]);
-    }
+    setSelectedAccessories((prevSelectedAccessories) => {
+      if (prevSelectedAccessories.includes(accessory)) {
+        return prevSelectedAccessories.filter((a) => a !== accessory);
+      } else {
+        return [...prevSelectedAccessories, accessory];
+      }
+    });
   };
+
+  const matchesAccessories =
+    selectedAccessories.length === 0 ||
+    selectedAccessories.every((accessory) =>
+      car?.accessories?.includes(accessory)
+    );
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "cars"), (snapshot) => {
@@ -185,6 +206,20 @@ export function CarsPage() {
       })) as CarsProps[];
       setData(data);
     });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, "accessories"),
+      (snapshot) => {
+        const accessoryData = snapshot.docs.map(
+          (doc) => doc.data().value
+        ) as string[];
+        setSelectedAccessories(accessoryData);
+      }
+    );
 
     return () => unsubscribe();
   }, []);
@@ -235,9 +270,9 @@ export function CarsPage() {
               ></label>
               <select
                 id="typeBody"
-                value={selectedFuel}
+                value={selectedTypeBody}
                 className="px-[14px] py-[7px] bg-green-200 rounded-md w-full"
-                onChange={(e) => setSelectedFuel(e.target.value)}
+                onChange={(e) => setSelectedTypeBody(e.target.value)}
               >
                 <option value="">Tipo</option>
                 {body.map((car) => (
@@ -309,9 +344,9 @@ export function CarsPage() {
                 onChange={(e) => setSelectedCity(e.target.value)}
               >
                 <option value="">Municipio</option>
-                {data.map((car) => (
-                  <option key={car.id} value={car.location}>
-                    {car.location}
+                {location.map((city) => (
+                  <option key={city.value} value={city.value}>
+                    {city.label}
                   </option>
                 ))}
               </select>
@@ -435,9 +470,8 @@ export function CarsPage() {
                       type="checkbox"
                       id={accessory.value}
                       name={accessory.value}
-                      value={accessory.value}
-                      checked={selectedAccessories.includes(accessory.value)}
-                      onChange={() => handleAccessorySelection(accessory.value)}
+                      checked={car?.accessories?.includes(accessory.value)}
+                      className="rounded-full"
                     />
                     <label className="text-[12px] text-white font-bold">
                       {accessory.label}
@@ -472,20 +506,18 @@ export function CarsPage() {
             {data
               .filter(
                 (car) =>
-                  car.model.toLowerCase().includes(search.toLowerCase()) &&
-                  (!selectedBrand || car.brand === selectedBrand) &&
+                  ((car.model.toLowerCase().includes(search.toLowerCase()) &&
+                    !selectedBrand) ||
+                    selectedBrand.toString().includes(car.brand)) &&
                   (!selectedYearFactory ||
-                    String(car.yearFactory) === selectedYearFactory) &&
-                  (!selectedYearModification ||
-                    String(car.yearModification) ===
-                      selectedYearModification) &&
-                  (!selectedCity || car.location === selectedCity) &&
-                  (filteredPrice === 0 || car.price >= filteredPrice) &&
-                  (!selectedExchange || car.exchange === selectedExchange) &&
-                  (!selectedDirection || car.direction === selectedDirection) &&
-                  (!selectedFuel || car.fuel === selectedFuel) &&
-                  (!selectedDoors ||
-                    Number(car.doors) === Number(selectedDoors)),
+                    selectedYearFactory
+                      .toString()
+                      .includes(car.yearFactory.toString())) &&
+                  car.price >= filteredPrice &&
+                  (!selectedCity || selectedCity === car.location) &&
+                  (!selectedExchange || selectedExchange === car.exchange) &&
+                  (!selectedDirection || selectedDirection === car.direction) &&
+                  (!selectedDoors || selectedDoors === car.doors.toString())
               )
               .map((car) => (
                 <Link

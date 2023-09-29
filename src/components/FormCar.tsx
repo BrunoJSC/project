@@ -2,7 +2,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { ChangeEvent, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as z from "zod";
-import { db, storage } from "../firebase";
+import { storage } from "../firebase";
 import { Layout } from "../layout/Layout";
 import { Image } from "lucide-react";
 import emailjs from "@emailjs/browser";
@@ -160,7 +160,7 @@ export function FormCar() {
         "service_x5am4vw",
         "template_vnqp85r",
         templateParams,
-        "LKMoT2R2yHx_zOxUI",
+        "LKMoT2R2yHx_zOxUI"
       );
 
       console.log("Document successfully written!");
@@ -185,8 +185,7 @@ export function FormCar() {
             <div className="border-b border-gray-900/10 pb-6 sm:pb-10">
               <h2 className="text-[32px] font-bold text-[#1e1e1e] leading-10">
                 envie as informações do seu{" "}
-                <span className="text-green-500">carro</span>{" "}
-                para o anúncio!
+                <span className="text-green-500">carro</span> para o anúncio!
               </h2>
               <p className="mt-1 text-sm leading-6 text-gray-600">
                 Informe os dados do carro!*
@@ -254,33 +253,20 @@ export function FormCar() {
                     {...register("location", { required: true })}
                   >
                     <option value="">Selecione um estado</option>
-                    <option value="AC">Acre</option>
-                    <option value="AL">Alagoas</option>
-                    <option value="AP">Amapá</option>
-                    <option value="AM">Amazonas</option>
-                    <option value="BA">Bahia</option>
-                    <option value="CE">Ceará</option>
-                    <option value="DF">Distrito Federal</option>
-                    <option value="ES">Espírito Santo</option>
-                    <option value="GO">Goiás</option>
-                    <option value="MA">Maranhão</option>
-                    <option value="MT">Mato Grosso</option>
-                    <option value="MS">Mato Grosso do Sul</option>
-                    <option value="MG">Minas Gerais</option>
-                    <option value="PA">Pará</option>
-                    <option value="PB">Paraíba</option>
-                    <option value="PR">Paraná</option>
-                    <option value="PE">Pernambuco</option>
-                    <option value="PI">Piauí</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                    <option value="RN">Rio Grande do Norte</option>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="RO">Rondônia</option>
-                    <option value="RR">Roraima</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="SE">Sergipe</option>
-                    <option value="Tocantins - TO">Tocantins</option>
+                    <option value="São Paulo">São Paulo</option>
+                    <option value="Guarulhos">Guarulhos</option>
+                    <option value="Campinas">Campinas</option>
+                    <option value="São Bernardo do Campo">
+                      São Bernardo do Campo
+                    </option>
+                    <option value="São José dos Campos">
+                      São José dos Campos
+                    </option>
+                    <option value="Santo André">Santo André</option>
+                    <option value="Ribeirão Preto">Ribeirão Preto</option>
+                    <option value="Osasco">Osasco</option>
+                    <option value="Sorocaba">Sorocaba</option>
+                    <option value="Mauá">Mauá</option>
                   </select>
                 </div>
               </div>
@@ -491,7 +477,6 @@ export function FormCar() {
                   {accessories.map((accessory) => (
                     <label key={accessory.value} className="flex items-center">
                       <input
-
                         type="checkbox"
                         id={accessory.value}
                         value={accessory.value}
@@ -568,8 +553,9 @@ export function FormCar() {
           </div>
           <button
             type="submit"
-            className={`mt-6 w-full rounded-md border border-transparent bg-green-700 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-500 ${loading && "cursor-not-allowed"
-              }`}
+            className={`mt-6 w-full rounded-md border border-transparent bg-green-700 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-500 ${
+              loading && "cursor-not-allowed"
+            }`}
             disabled={loading}
           >
             Enviar
